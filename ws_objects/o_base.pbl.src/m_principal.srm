@@ -2,14 +2,43 @@
 forward
 global type m_principal from menu
 end type
+type m_gestiondesalarios from menu within m_principal
+end type
+type m_cargadedatos from menu within m_gestiondesalarios
+end type
+type m_listados from menu within m_gestiondesalarios
+end type
+type m_gestiondesalarios from menu within m_principal
+m_cargadedatos m_cargadedatos
+m_listados m_listados
+end type
+type m_gestiondeempleados from menu within m_principal
+end type
+type m_cargadedatos1 from menu within m_gestiondeempleados
+end type
+type m_paises from menu within m_cargadedatos1
+end type
+type m_cargadedatos1 from menu within m_gestiondeempleados
+m_paises m_paises
+end type
+type m_listados1 from menu within m_gestiondeempleados
+end type
+type m_gestiondeempleados from menu within m_principal
+m_cargadedatos1 m_cargadedatos1
+m_listados1 m_listados1
+end type
 type m_salir from menu within m_principal
 end type
 global type m_principal from menu
+m_gestiondesalarios m_gestiondesalarios
+m_gestiondeempleados m_gestiondeempleados
 m_salir m_salir
 end type
 end forward
 
 global type m_principal from menu
+m_gestiondesalarios m_gestiondesalarios
+m_gestiondeempleados m_gestiondeempleados
 m_salir m_salir
 end type
 global m_principal m_principal
@@ -33,17 +62,238 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
+this.m_gestiondesalarios=create m_gestiondesalarios
+this.m_gestiondeempleados=create m_gestiondeempleados
 this.m_salir=create m_salir
+this.Item[UpperBound(this.Item)+1]=this.m_gestiondesalarios
+this.Item[UpperBound(this.Item)+1]=this.m_gestiondeempleados
 this.Item[UpperBound(this.Item)+1]=this.m_salir
 end on
 
 on m_principal.destroy
 call super::destroy
+destroy(this.m_gestiondesalarios)
+destroy(this.m_gestiondeempleados)
 destroy(this.m_salir)
+end on
+
+type m_gestiondesalarios from menu within m_principal
+m_cargadedatos m_cargadedatos
+m_listados m_listados
+end type
+
+on m_gestiondesalarios.create
+call super::create
+this.text = "Gestion de Salarios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_cargadedatos=create m_cargadedatos
+this.m_listados=create m_listados
+this.Item[UpperBound(this.Item)+1]=this.m_cargadedatos
+this.Item[UpperBound(this.Item)+1]=this.m_listados
+end on
+
+on m_gestiondesalarios.destroy
+call super::destroy
+destroy(this.m_cargadedatos)
+destroy(this.m_listados)
+end on
+
+type m_cargadedatos from menu within m_gestiondesalarios
+end type
+
+on m_cargadedatos.create
+call super::create
+this.text = "Carga de Datos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cargadedatos.destroy
+call super::destroy
+end on
+
+type m_listados from menu within m_gestiondesalarios
+end type
+
+on m_listados.create
+call super::create
+this.text = "Listados"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_listados.destroy
+call super::destroy
+end on
+
+type m_gestiondeempleados from menu within m_principal
+m_cargadedatos1 m_cargadedatos1
+m_listados1 m_listados1
+end type
+
+on m_gestiondeempleados.create
+call super::create
+this.text = "Gestion de Empleados"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_cargadedatos1=create m_cargadedatos1
+this.m_listados1=create m_listados1
+this.Item[UpperBound(this.Item)+1]=this.m_cargadedatos1
+this.Item[UpperBound(this.Item)+1]=this.m_listados1
+end on
+
+on m_gestiondeempleados.destroy
+call super::destroy
+destroy(this.m_cargadedatos1)
+destroy(this.m_listados1)
+end on
+
+type m_cargadedatos1 from menu within m_gestiondeempleados
+m_paises m_paises
+end type
+
+on m_cargadedatos1.create
+call super::create
+this.text = "Carga de Datos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_paises=create m_paises
+this.Item[UpperBound(this.Item)+1]=this.m_paises
+end on
+
+on m_cargadedatos1.destroy
+call super::destroy
+destroy(this.m_paises)
+end on
+
+type m_paises from menu within m_cargadedatos1
+end type
+
+event clicked;open(w_abm_paises)
+end event
+
+on m_paises.create
+call super::create
+this.text = "Paises"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paises.destroy
+call super::destroy
+end on
+
+type m_listados1 from menu within m_gestiondeempleados
+end type
+
+on m_listados1.create
+call super::create
+this.text = "Listados"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_listados1.destroy
+call super::destroy
 end on
 
 type m_salir from menu within m_principal
 end type
+
+event clicked;halt
+end event
 
 on m_salir.create
 call super::create
@@ -68,7 +318,4 @@ end on
 on m_salir.destroy
 call super::destroy
 end on
-
-event clicked;halt
-end event
 
