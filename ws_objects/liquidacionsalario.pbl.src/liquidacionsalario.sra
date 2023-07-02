@@ -12,24 +12,37 @@ end forward
 
 global type liquidacionsalario from application
 string appname = "liquidacionsalario"
+string themepath = "C:\Program Files (x86)\Appeon\PowerBuilder 19.0\IDE\theme"
+string themename = "Do Not Use Themes"
+boolean nativepdfvalid = false
+boolean nativepdfincludecustomfont = false
+string nativepdfappname = ""
+long richtextedittype = 2
+long richtexteditx64type = 3
+long richtexteditversion = 1
+string richtexteditkey = ""
+string appicon = ""
 string appruntimeversion = "19.2.0.2703"
 end type
 global liquidacionsalario liquidacionsalario
 
 on liquidacionsalario.create
-appname = "liquidacionsalario"
-message = create message
-sqlca = create transaction
-sqlda = create dynamicdescriptionarea
-sqlsa = create dynamicstagingarea
-error = create error
+appname="liquidacionsalario"
+message=create message
+sqlca=create transaction
+sqlda=create dynamicdescriptionarea
+sqlsa=create dynamicstagingarea
+error=create error
 end on
 
 on liquidacionsalario.destroy
-destroy( sqlca )
-destroy( sqlda )
-destroy( sqlsa )
-destroy( error )
-destroy( message )
+destroy(sqlca)
+destroy(sqlda)
+destroy(sqlsa)
+destroy(error)
+destroy(message)
 end on
+
+event open;open(w_conexion)
+end event
 
