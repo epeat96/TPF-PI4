@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/1/2023 7:35:19 PM                          */
+/* Created on:     7/1/2023 8:02:51 PM                          */
 /*==============================================================*/
 
 
@@ -165,6 +165,14 @@ if exists(
      and table_type in ('BASE', 'GBL TEMP')
 ) then
     drop table DEPARTAMENTOS
+end if;
+
+if exists(
+   select 1 from sys.systable 
+   where table_name='DIAS_FESTIVOS'
+     and table_type in ('BASE', 'GBL TEMP')
+) then
+    drop table DIAS_FESTIVOS
 end if;
 
 if exists(
@@ -382,6 +390,17 @@ create table DEPARTAMENTOS
    PAIS                 D_IDENTIFICADOR                null,
    NOMBRE               D_NOMBRE                       null,
    constraint PK_DEPARTAMENTOS primary key clustered (DEPARTAMENTO)
+);
+
+/*==============================================================*/
+/* Table: DIAS_FESTIVOS                                         */
+/*==============================================================*/
+create table DIAS_FESTIVOS 
+(
+   DIA_FESTIVO          D_IDENTIFICADOR                not null,
+   NOMBRE               D_NOMBRE                       null,
+   FECHA_NACIMIENTO     date                           not null,
+   constraint PK_DIAS_FESTIVOS primary key clustered (DIA_FESTIVO)
 );
 
 /*==============================================================*/
