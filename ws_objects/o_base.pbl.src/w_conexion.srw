@@ -183,7 +183,7 @@ lclave = sle_clave.text
 SQLCA.DBMS = "ODBC" // Configuracion de parametros a la BD
 SQLCA.AutoCommit = False
 
-SQLCA.DBParm = "ConnectString = 'DSN=examenprog4; UID="+lusuario+"; PWD="+lclave+"', ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'"
+SQLCA.DBParm = "ConnectString = 'DSN=LiquidacionSalario; UID="+lusuario+"; PWD="+lclave+"', ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'"
 
 CONNECT USING SQLCA;
 
