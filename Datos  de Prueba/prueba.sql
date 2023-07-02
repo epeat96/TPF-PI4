@@ -1,8 +1,8 @@
 -- Paises
 INSERT INTO paises (pais, nombre) VALUES (1, 'Paraguay');
 INSERT INTO paises (pais, nombre) VALUES (2, 'Argentina');
-INSERT INTO paises (pais, nombre) VALUES (3, 'Concepción');
-INSERT INTO paises (pais, nombre) VALUES (4, 'Concepción');
+INSERT INTO paises (pais, nombre) VALUES (3, 'Brasil');
+INSERT INTO paises (pais, nombre) VALUES (4, 'Uruguay');
 -- Departamentos
 -- Departamentos del Paraguay
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (1, 1, 'Concepción');
@@ -95,3 +95,25 @@ INSERT INTO departamentos (departamento, pais, nombre) VALUES (84, 4, 'San José
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (85, 4, 'Soriano');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (86, 4, 'Tacuarembó');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (87, 4, 'Treinta y Tres');
+-- Ciudades Paraguay - Central
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (1, 11, 'Asunción');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (2, 11, 'San Lorenzo');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (3, 11, 'Luque');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (4, 11, 'Capiatá');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (5, 11, 'Lambaré');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (6, 11, 'Fernando de la Mora');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (7, 11, 'Limpio');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (8, 11, 'Ñemby');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (9, 11, 'Mariano Roque Alonso');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (10, 11, 'Villa Elisa');
+-- Ciudades Argentina - Chubut
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (11, 21, 'Rawson');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (12, 21, 'Trelew');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (13, 21, 'Puerto Madryn');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (14, 21, 'Comodoro Rivadavia');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (15, 21, 'Esquel');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (16, 21, 'Gaiman');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (17, 21, 'Dolavon');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (18, 21, 'Sarmiento');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (19, 21, 'Rada Tilly');
+INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (20, 21, 'Lago Puelo');
