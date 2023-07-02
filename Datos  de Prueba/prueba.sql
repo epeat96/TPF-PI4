@@ -117,3 +117,25 @@ INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (17, 21, 'Dolavon');
 INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (18, 21, 'Sarmiento');
 INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (19, 21, 'Rada Tilly');
 INSERT INTO ciudades (ciudad, departamento, nombre) VALUES (20, 21, 'Lago Puelo');
+-- Barrios Paraguay
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (1, 1, 'Barrio Obrero');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (2, 2, 'San Pablo');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (3, 3, 'Tarumandy');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (4, 4, 'Caacupemí');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (5, 5, 'Ytay');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (6, 6, 'Mburucuyá');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (7, 7, 'Aguai');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (8, 8, 'Pa’i Ñu');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (9, 9, 'Tacumbú');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (10, 10, 'San Miguel');
+-- Barrios Argentina
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (11, 11, 'Don Bosco');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (12, 12, 'Las Margaritas');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (13, 13, 'San Miguel');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (14, 14, 'General Mosconi');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (15, 15, 'La Loma');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (16, 16, 'Villa Ayacucho');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (17, 17, 'Centro');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (18, 18, 'San Isidro');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (19, 19, 'Rada Tilly Centro');
+INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (20, 20, 'Lago Puelo Centro');
