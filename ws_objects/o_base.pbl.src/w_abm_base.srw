@@ -190,7 +190,7 @@ if dw_datos.update(true,false) = 1 then
 	cb_cancelar.event clicked()
 else
 	rollback using sqlca;
-	messageBox("error", "te mamaste prro", stopsign!)
+	messageBox("error", "Hubo un error al grabar!", stopsign!)
 end if
 
 end event
