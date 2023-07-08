@@ -6,6 +6,11 @@ type m_gestiondesalarios from menu within m_principal
 end type
 type m_cargadedatos from menu within m_gestiondesalarios
 end type
+type m_salario from menu within m_cargadedatos
+end type
+type m_cargadedatos from menu within m_gestiondesalarios
+m_salario m_salario
+end type
 type m_listados from menu within m_gestiondesalarios
 end type
 type m_gestiondesalarios from menu within m_principal
@@ -16,10 +21,10 @@ type m_gestiondeempleados from menu within m_principal
 end type
 type m_cargadedatos1 from menu within m_gestiondeempleados
 end type
-type m_paises from menu within m_cargadedatos1
+type m_w_empleado from menu within m_cargadedatos1
 end type
 type m_cargadedatos1 from menu within m_gestiondeempleados
-m_paises m_paises
+m_w_empleado m_w_empleado
 end type
 type m_listados1 from menu within m_gestiondeempleados
 end type
@@ -113,6 +118,7 @@ destroy(this.m_listados)
 end on
 
 type m_cargadedatos from menu within m_gestiondesalarios
+m_salario m_salario
 end type
 
 on m_cargadedatos.create
@@ -133,9 +139,39 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
+this.m_salario=create m_salario
+this.Item[UpperBound(this.Item)+1]=this.m_salario
 end on
 
 on m_cargadedatos.destroy
+call super::destroy
+destroy(this.m_salario)
+end on
+
+type m_salario from menu within m_cargadedatos
+end type
+
+on m_salario.create
+call super::create
+this.text = "Salario"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_salario.destroy
 call super::destroy
 end on
 
@@ -202,7 +238,7 @@ destroy(this.m_listados1)
 end on
 
 type m_cargadedatos1 from menu within m_gestiondeempleados
-m_paises m_paises
+m_w_empleado m_w_empleado
 end type
 
 on m_cargadedatos1.create
@@ -223,24 +259,24 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
-this.m_paises=create m_paises
-this.Item[UpperBound(this.Item)+1]=this.m_paises
+this.m_w_empleado=create m_w_empleado
+this.Item[UpperBound(this.Item)+1]=this.m_w_empleado
 end on
 
 on m_cargadedatos1.destroy
 call super::destroy
-destroy(this.m_paises)
+destroy(this.m_w_empleado)
 end on
 
-type m_paises from menu within m_cargadedatos1
+type m_w_empleado from menu within m_cargadedatos1
 end type
 
-event clicked;open(w_abm_paises)
+event clicked;open(w_abm_empleados)
 end event
 
-on m_paises.create
+on m_w_empleado.create
 call super::create
-this.text = "Paises"
+this.text = "W_Empleado"
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -258,7 +294,7 @@ this.toolbargradient = true
 this.bitmapgradient = true
 end on
 
-on m_paises.destroy
+on m_w_empleado.destroy
 call super::destroy
 end on
 
