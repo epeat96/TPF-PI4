@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/1/2023 8:02:51 PM                          */
+/* Created on:     7/15/2023 7:49:20 PM                         */
 /*==============================================================*/
 
 
@@ -397,10 +397,9 @@ create table DEPARTAMENTOS
 /*==============================================================*/
 create table DIAS_FESTIVOS 
 (
-   DIA_FESTIVO          D_IDENTIFICADOR                not null,
    NOMBRE               D_NOMBRE                       null,
    FECHA_NACIMIENTO     date                           not null,
-   constraint PK_DIAS_FESTIVOS primary key clustered (DIA_FESTIVO)
+   constraint PK_DIAS_FESTIVOS primary key clustered (FECHA_NACIMIENTO)
 );
 
 /*==============================================================*/
@@ -453,10 +452,12 @@ create table EMPLEADOS
 /*==============================================================*/
 create table HIJOS 
 (
+   HIJO                 D_IDENTIFICADOR                not null,
    LEGAJO               varchar(100)                   null,
    NOMBRE               D_NOMBRE                       null,
    APELLIDO             D_NOMBRE                       not null,
-   FECHA_NACIMIENTO     date                           null
+   FECHA_NACIMIENTO     date                           null,
+   constraint PK_HIJOS primary key clustered (HIJO)
 );
 
 /*==============================================================*/
