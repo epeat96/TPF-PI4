@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/15/2023 7:49:20 PM                         */
+/* Created on:     7/15/2023 7:55:33 PM                         */
 /*==============================================================*/
 
 
@@ -398,8 +398,8 @@ create table DEPARTAMENTOS
 create table DIAS_FESTIVOS 
 (
    NOMBRE               D_NOMBRE                       null,
-   FECHA_NACIMIENTO     date                           not null,
-   constraint PK_DIAS_FESTIVOS primary key clustered (FECHA_NACIMIENTO)
+   FECHA                date                           not null,
+   constraint PK_DIAS_FESTIVOS primary key clustered (FECHA)
 );
 
 /*==============================================================*/
@@ -491,6 +491,7 @@ create table LIQUIDACIONES_DETALLES
    MONTO                D_MONTO                        not null,
    SIGNO                character                      null
       constraint CKC_SIGNO_LIQUIDAC check (SIGNO is null or (SIGNO in ('S','R'))),
+   FECHA                date                           not null,
    constraint PK_LIQUIDACIONES_DETALLES primary key clustered (LIQUIDACION, CONCEPTO)
 );
 
