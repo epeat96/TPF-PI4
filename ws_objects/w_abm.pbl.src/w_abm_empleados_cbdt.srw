@@ -79,6 +79,9 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
+event constructor;this.settransobject(sqlca)
+end event
+
 type dw_detalle_emails from datawindow within w_abm_empleados_cbdt
 integer x = 2313
 integer y = 1904
@@ -91,6 +94,9 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
+event constructor;this.settransobject(sqlca)
+end event
+
 type dw_detalle_hijos from datawindow within w_abm_empleados_cbdt
 integer x = 2322
 integer y = 896
@@ -102,6 +108,9 @@ string dataobject = "dw_abm_empleados_detalle_hijos"
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
+
+event constructor;this.settransobject(sqlca)
+end event
 
 type cb_cancelar from commandbutton within w_abm_empleados_cbdt
 integer x = 4946
@@ -139,7 +148,53 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
-event itemchanged;this.settransobject(sqlca)
+event constructor;this.settransobject(sqlca)
+end event
+
+event itemchanged;Long 	lcant_filas
+any lvalor1
+dw_cabecera.AcceptText()
+
+if this.GetColumn() = 1 then
+	lvalor1 = Long(dw_cabecera.Object.Data[1,1])
+	lcant_filas = dw_cabecera.retrieve(lvalor1)
+	
+	if lcant_filas > 0 then
+		lcant_filas = dw_detalle_hijos.retrieve(lvalor1)
+		if lcant_filas < 0 then
+			MessageBox("Atencion","Se ha producido un error durante la lectura de los datos del detalle [durante la lectura de los hijos]", StopSign!)
+		elseif lcant_filas = 0 then
+			MessageBox("Atencion","No hay datos para recuperar en el detalle de hijos", Information!)
+		end if
+
+		lcant_filas = dw_detalle_emails.retrieve(lvalor1)
+		if lcant_filas < 0 then
+			MessageBox("Atencion","Se ha producido un error durante la lectura de los datos del detalle [durante la lectura de los emails]", StopSign!)
+		elseif lcant_filas = 0 then
+			MessageBox("Atencion","No hay datos para recuperar en el detalle de emails", Information!)
+		end if
+
+		lcant_filas = dw_detalle_telefonos.retrieve(lvalor1)
+		if lcant_filas < 0 then
+			MessageBox("Atencion","Se ha producido un error durante la lectura de los datos del detalle [durante la lectura de los telefonos]", StopSign!)
+		elseif lcant_filas = 0 then
+			MessageBox("Atencion","No hay datos para recuperar en el detalle de telefonos", Information!)
+		end if 
+
+		commit using SQLCA;
+
+	elseif lcant_filas < 0 then 
+		rollback using SQLCA;
+		MessageBox("Atencion","Se ha producido un error durante la lectura de los datos de la cabecera",StopSign!)
+	elseif lcant_filas = 0 then
+			cb_cancelar.event clicked()
+			dw_cabecera.SetItem(1,1,lvalor1)
+	end if
+
+	dw_cabecera.SetFocus()
+end if
+this.settransobject(sqlca)
+
 end event
 
 type gb_1 from groupbox within w_abm_empleados_cbdt
