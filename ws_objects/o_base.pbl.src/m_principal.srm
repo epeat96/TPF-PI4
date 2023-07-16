@@ -271,12 +271,12 @@ end on
 type m_w_empleado from menu within m_cargadedatos1
 end type
 
-event clicked;open(w_abm_empleados)
+event clicked;open(w_abm_empleados_cbdt)
 end event
 
 on m_w_empleado.create
 call super::create
-this.text = "W_Empleado"
+this.text = "Empleado"
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
