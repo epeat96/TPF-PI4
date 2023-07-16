@@ -32,11 +32,27 @@ type m_gestiondeempleados from menu within m_principal
 m_cargadedatos1 m_cargadedatos1
 m_listados1 m_listados1
 end type
+type m_gestiondedatosextra from menu within m_principal
+end type
+type p from menu within m_gestiondedatosextra
+end type
+type m_paises from menu within p
+end type
+type m_ciudades from menu within p
+end type
+type p from menu within m_gestiondedatosextra
+m_paises m_paises
+m_ciudades m_ciudades
+end type
+type m_gestiondedatosextra from menu within m_principal
+p p
+end type
 type m_salir from menu within m_principal
 end type
 global type m_principal from menu
 m_gestiondesalarios m_gestiondesalarios
 m_gestiondeempleados m_gestiondeempleados
+m_gestiondedatosextra m_gestiondedatosextra
 m_salir m_salir
 end type
 end forward
@@ -44,6 +60,7 @@ end forward
 global type m_principal from menu
 m_gestiondesalarios m_gestiondesalarios
 m_gestiondeempleados m_gestiondeempleados
+m_gestiondedatosextra m_gestiondedatosextra
 m_salir m_salir
 end type
 global m_principal m_principal
@@ -69,9 +86,11 @@ this.toolbargradient = true
 this.bitmapgradient = true
 this.m_gestiondesalarios=create m_gestiondesalarios
 this.m_gestiondeempleados=create m_gestiondeempleados
+this.m_gestiondedatosextra=create m_gestiondedatosextra
 this.m_salir=create m_salir
 this.Item[UpperBound(this.Item)+1]=this.m_gestiondesalarios
 this.Item[UpperBound(this.Item)+1]=this.m_gestiondeempleados
+this.Item[UpperBound(this.Item)+1]=this.m_gestiondedatosextra
 this.Item[UpperBound(this.Item)+1]=this.m_salir
 end on
 
@@ -79,8 +98,12 @@ on m_principal.destroy
 call super::destroy
 destroy(this.m_gestiondesalarios)
 destroy(this.m_gestiondeempleados)
+destroy(this.m_gestiondedatosextra)
 destroy(this.m_salir)
 end on
+
+event clicked;open(w_abm_paises)
+end event
 
 type m_gestiondesalarios from menu within m_principal
 m_cargadedatos m_cargadedatos
@@ -322,6 +345,132 @@ this.bitmapgradient = true
 end on
 
 on m_listados1.destroy
+call super::destroy
+end on
+
+type m_gestiondedatosextra from menu within m_principal
+p p
+end type
+
+on m_gestiondedatosextra.create
+call super::create
+this.text = "Gestion de Datos Extra"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.p=create p
+this.Item[UpperBound(this.Item)+1]=this.p
+end on
+
+on m_gestiondedatosextra.destroy
+call super::destroy
+destroy(this.p)
+end on
+
+type p from menu within m_gestiondedatosextra
+m_paises m_paises
+m_ciudades m_ciudades
+end type
+
+on p.create
+call super::create
+this.text = "Carga de Datos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_paises=create m_paises
+this.m_ciudades=create m_ciudades
+this.Item[UpperBound(this.Item)+1]=this.m_paises
+this.Item[UpperBound(this.Item)+1]=this.m_ciudades
+end on
+
+on p.destroy
+call super::destroy
+destroy(this.m_paises)
+destroy(this.m_ciudades)
+end on
+
+type m_paises from menu within p
+end type
+
+on m_paises.create
+call super::create
+this.text = "Paises"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paises.destroy
+call super::destroy
+end on
+
+event clicked;open(w_abm_paises)
+end event
+
+type m_ciudades from menu within p
+end type
+
+event clicked;open(w_abm_ciudades)
+end event
+
+on m_ciudades.create
+call super::create
+this.text = "Ciudades"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ciudades.destroy
 call super::destroy
 end on
 
