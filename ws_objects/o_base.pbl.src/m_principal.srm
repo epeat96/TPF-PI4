@@ -441,6 +441,9 @@ on m_paises.destroy
 call super::destroy
 end on
 
+event clicked;open(w_abm_paises)
+end event
+
 type m_ciudades from menu within p
 end type
 
