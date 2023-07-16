@@ -1,3 +1,9 @@
+-- Limpiar la base de datos
+DELETE FROM barrios;
+DELETE FROM ciudades;
+DELETE FROM departamentos;
+DELETE FROM paises;
+DELETE FROM tipos_documentos;
 -- Paises
 INSERT INTO paises (pais, nombre) VALUES (1, 'Paraguay');
 INSERT INTO paises (pais, nombre) VALUES (2, 'Argentina');
@@ -139,3 +145,14 @@ INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (17, 17, 'Centro');
 INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (18, 18, 'San Isidro');
 INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (19, 19, 'Rada Tilly Centro');
 INSERT INTO barrios (barrio, ciudad, Nombre) VALUES (20, 20, 'Lago Puelo Centro');
+-- Tipos Documentos
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (1, 'Cédula de Identidad');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (2, 'Pasaporte');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (3, 'Licencia de Conducir');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (4, 'Tarjeta de Identificación Militar');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (5, 'Tarjeta de Residente Permanente');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (6, 'Certificado de Ciudadanía');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (7, 'Certificado de Nacimiento');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (8, 'Tarjeta de Seguro Social');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (9, 'Tarjeta de Trabajo');
+INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (10, 'Documento Nacional de Identidad');
