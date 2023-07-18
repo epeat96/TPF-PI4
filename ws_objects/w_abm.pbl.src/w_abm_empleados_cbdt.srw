@@ -2,6 +2,8 @@
 forward
 global type w_abm_empleados_cbdt from window
 end type
+type cb_agregar from commandbutton within w_abm_empleados_cbdt
+end type
 type cb_grabar from commandbutton within w_abm_empleados_cbdt
 end type
 type cb_borrar from commandbutton within w_abm_empleados_cbdt
@@ -39,6 +41,7 @@ windowstate windowstate = maximized!
 long backcolor = 67108864
 string icon = "AppIcon!"
 boolean center = true
+cb_agregar cb_agregar
 cb_grabar cb_grabar
 cb_borrar cb_borrar
 cb_salir cb_salir
@@ -57,6 +60,7 @@ string CurrentFocus
 end variables
 
 on w_abm_empleados_cbdt.create
+this.cb_agregar=create cb_agregar
 this.cb_grabar=create cb_grabar
 this.cb_borrar=create cb_borrar
 this.cb_salir=create cb_salir
@@ -67,7 +71,8 @@ this.dw_detalle_hijos=create dw_detalle_hijos
 this.cb_cancelar=create cb_cancelar
 this.dw_cabecera=create dw_cabecera
 this.gb_1=create gb_1
-this.Control[]={this.cb_grabar,&
+this.Control[]={this.cb_agregar,&
+this.cb_grabar,&
 this.cb_borrar,&
 this.cb_salir,&
 this.cb_borrar_item,&
@@ -80,6 +85,7 @@ this.gb_1}
 end on
 
 on w_abm_empleados_cbdt.destroy
+destroy(this.cb_agregar)
 destroy(this.cb_grabar)
 destroy(this.cb_borrar)
 destroy(this.cb_salir)
@@ -93,6 +99,30 @@ destroy(this.gb_1)
 end on
 
 event open;cb_cancelar.event clicked()
+end event
+
+type cb_agregar from commandbutton within w_abm_empleados_cbdt
+integer x = 4859
+integer y = 516
+integer width = 402
+integer height = 112
+integer taborder = 70
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+string text = "Agregar Item"
+end type
+
+event clicked;if CurrentFocus = "hijos" then
+ 	dw_detalle_hijos.InsertRow(0)
+elseif CurrentFocus = "emails" then
+        dw_detalle_emails.InsertRow(0)
+elseif CurrentFocus = 'telefonos' then
+        dw_detalle_telefonos.InsertRow(0)
+end if
 end event
 
 type cb_grabar from commandbutton within w_abm_empleados_cbdt
@@ -111,8 +141,8 @@ string text = "Grabar"
 end type
 
 event clicked;dw_cabecera.AcceptText()
+long i
 if dw_cabecera.RowCount() > 0 then
-	long i
 	any lvalor1
 	dw_cabecera.AcceptText()
 	dw_detalle_hijos.AcceptText()
@@ -128,6 +158,14 @@ if dw_cabecera.RowCount() > 0 then
 	for i = 1 to dw_detalle_emails.RowCount()
 		dw_detalle_emails.SetItem(i,1,lvalor1)
 	next
+	
+end if
+
+dw_cabecera.AcceptText()
+dw_detalle_hijos.AcceptText()
+dw_detalle_emails.AcceptText()
+dw_detalle_telefonos.AcceptText()
+if dw_cabecera.Update(true, false) = 1 then
 	
 	for i = dw_detalle_hijos.RowCount() to 1 step -1
 		
@@ -153,10 +191,6 @@ if dw_cabecera.RowCount() > 0 then
 			dw_detalle_emails.DeleteRow(1)
 		end if
 	next
-	
-end if
-
-if dw_cabecera.Update(true, false) = 1 then
     if dw_detalle_hijos.Update(true, false) = 1 then
         if dw_detalle_telefonos.Update(true, false) = 1 then
             if dw_detalle_emails.Update(true, false) = 1 then
@@ -204,7 +238,7 @@ end event
 
 type cb_salir from commandbutton within w_abm_empleados_cbdt
 integer x = 4859
-integer y = 836
+integer y = 1012
 integer width = 402
 integer height = 112
 integer taborder = 50
@@ -293,6 +327,7 @@ event getfocus;CurrentFocus = "emails"
 end event
 
 type dw_detalle_hijos from datawindow within w_abm_empleados_cbdt
+event nuevo_item pbm_keydown
 integer x = 2322
 integer y = 896
 integer width = 2437
@@ -304,6 +339,11 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
+event nuevo_item;if key = keyenter! then
+	this.insertRow(0)
+end if
+end event
+
 event constructor;this.settransobject(sqlca)
 end event
 
@@ -312,7 +352,7 @@ end event
 
 type cb_cancelar from commandbutton within w_abm_empleados_cbdt
 integer x = 4859
-integer y = 520
+integer y = 672
 integer width = 402
 integer height = 112
 integer taborder = 60
@@ -330,9 +370,6 @@ dw_detalle_hijos.Reset()
 dw_detalle_emails.Reset()
 dw_detalle_telefonos.Reset()
 dw_cabecera.InsertRow(0)
-dw_detalle_hijos.InsertRow(0)
-dw_detalle_emails.InsertRow(0)
-dw_detalle_telefonos.InsertRow(0)
 dw_cabecera.SetFocus()
 end event
 
@@ -358,7 +395,6 @@ dw_cabecera.AcceptText()
 if this.GetColumn() = 1 then
 	lvalor1 = String(dw_cabecera.Object.Data[1,1])
 	lcant_filas = dw_cabecera.retrieve(lvalor1)
-	MessageBox("Debug", "El valor de lcant_filas es: " + string(lcant_filas))
 	if lcant_filas > 0 then
 		lcant_filas = dw_detalle_hijos.retrieve(lvalor1)
 		if lcant_filas < 0 then
