@@ -1,7 +1,4 @@
 -- Limpiar la base de datos
-DELETE FROM barrios;
-DELETE FROM ciudades;
-DELETE FROM departamentos;
 DELETE FROM paises;
 DELETE FROM tipos_documentos;
 -- Paises

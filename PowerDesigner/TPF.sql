@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/15/2023 7:55:33 PM                         */
+/* Created on:     7/17/2023 8:25:11 PM                         */
 /*==============================================================*/
 
 
@@ -593,25 +593,25 @@ alter table BARRIOS
    add constraint FK_BARRIOS_REFERENCE_CIUDADES foreign key (CIUDAD)
       references CIUDADES (CIUDAD)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
 alter table CIUDADES
    add constraint FK_CIUDADES_REFERENCE_DEPARTAM foreign key (DEPARTAMENTO)
       references DEPARTAMENTOS (DEPARTAMENTO)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
 alter table DEPARTAMENTOS
    add constraint FK_DEPARTAM_REFERENCE_PAISES foreign key (PAIS)
       references PAISES (PAIS)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
 alter table EMAILS_EMPLEADOS
    add constraint FK_EMAILS_E_REFERENCE_EMPLEADO foreign key (LEGAJO)
       references EMPLEADOS (LEGAJO)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
 alter table EMPLEADOS
    add constraint FK_EMPLEADO_REFERENCE_BARRIOS foreign key (BARRIO_RESIDENCIA)
@@ -677,7 +677,7 @@ alter table HIJOS
    add constraint FK_HIJOS_REFERENCE_EMPLEADO foreign key (LEGAJO)
       references EMPLEADOS (LEGAJO)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
 alter table LIQUIDACIONES
    add constraint FK_LIQUIDAC_REFERENCE_EMPLEADO foreign key (LEGAJO)
@@ -713,7 +713,7 @@ alter table SALARIOS_EMPLEADOS
    add constraint FK_SALARIOS_REFERENCE_EMPLEADO foreign key (LEGAJO)
       references EMPLEADOS (LEGAJO)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
 alter table SALARIOS_EMPLEADOS
    add constraint FK_SALARIOS_REFERENCE_MOTIVOS foreign key (MOTIVO)
@@ -725,5 +725,5 @@ alter table TELEFONOS_EMPLEADOS
    add constraint FK_TELEFONO_REFERENCE_EMPLEADO foreign key (LEGAJO)
       references EMPLEADOS (LEGAJO)
       on update restrict
-      on delete restrict;
+      on delete cascade;
 
