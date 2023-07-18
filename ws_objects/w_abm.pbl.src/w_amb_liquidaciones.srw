@@ -49,6 +49,7 @@ integer width = 3200
 integer height = 1080
 string dataobject = "dw_abm_liquidaciones_detalle"
 boolean hscrollbar = true
+boolean vscrollbar = true
 end type
 
 type dw_datos from w_abm_cabecera_base`dw_datos within w_amb_liquidaciones
