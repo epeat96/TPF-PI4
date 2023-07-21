@@ -1,0 +1,12 @@
+﻿$PBExportHeader$f_habilitaboton.srf
+global type f_habilitaboton from function_object
+end type
+
+forward prototypes
+global subroutine f_habilitaboton (commandbutton pa_boton)
+end prototypes
+
+global subroutine f_habilitaboton (commandbutton pa_boton);pa_boton.enabled=true
+	return 
+end subroutine
+

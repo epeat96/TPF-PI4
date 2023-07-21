@@ -1,0 +1,12 @@
+﻿$PBExportHeader$f_deshabilitaboton.srf
+global type f_deshabilitaboton from function_object
+end type
+
+forward prototypes
+global subroutine f_deshabilitaboton (commandbutton pa_boton)
+end prototypes
+
+global subroutine f_deshabilitaboton (commandbutton pa_boton);pa_boton.enabled=false
+	return 
+end subroutine
+
