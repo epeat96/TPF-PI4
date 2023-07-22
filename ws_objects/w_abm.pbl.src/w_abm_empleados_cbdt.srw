@@ -121,6 +121,12 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
+event constructor;this.settransobject(sqlca)
+end event
+
+event getfocus;CurrentFocus = "salarios"
+end event
+
 type cb_agregar from commandbutton within w_abm_empleados_cbdt
 integer x = 4859
 integer y = 516
@@ -140,8 +146,10 @@ event clicked;if CurrentFocus = "hijos" then
  	dw_detalle_hijos.InsertRow(0)
 elseif CurrentFocus = "emails" then
         dw_detalle_emails.InsertRow(0)
-elseif CurrentFocus = 'telefonos' then
+elseif CurrentFocus = "telefonos" then
         dw_detalle_telefonos.InsertRow(0)
+	elseif CurrentFocus = "salarios" Then
+		dw_detalle_salarios.InsertRow(0)
 end if
 end event
 
@@ -168,6 +176,7 @@ if dw_cabecera.RowCount() > 0 then
 	dw_detalle_hijos.AcceptText()
 	dw_detalle_emails.AcceptText()
 	dw_detalle_telefonos.AcceptText()
+	dw_detalle_salarios.AcceptText()
 	lvalor1 = dw_cabecera.Object.Data[1,1]
 	for i = 1 to dw_detalle_hijos.RowCount()
 		dw_detalle_hijos.SetItem(i,1,lvalor1)
@@ -178,6 +187,9 @@ if dw_cabecera.RowCount() > 0 then
 	for i = 1 to dw_detalle_emails.RowCount()
 		dw_detalle_emails.SetItem(i,1,lvalor1)
 	next
+	for i = 1 to dw_detalle_salarios.RowCount()
+		dw_detalle_salarios.SetItem(i,1,lvalor1)
+	next
 	
 end if
 
@@ -185,6 +197,7 @@ dw_cabecera.AcceptText()
 dw_detalle_hijos.AcceptText()
 dw_detalle_emails.AcceptText()
 dw_detalle_telefonos.AcceptText()
+dw_detalle_salarios.AcceptText()
 if dw_cabecera.Update(true, false) = 1 then
 	
 	for i = dw_detalle_hijos.RowCount() to 1 step -1
@@ -211,11 +224,28 @@ if dw_cabecera.Update(true, false) = 1 then
 			dw_detalle_emails.DeleteRow(1)
 		end if
 	next
+	
+	for i = dw_detalle_salarios.RowCount() to 1 step -1
+		
+		if isnull (dw_detalle_salarios.GetItemNumber(i,'salario')) & 
+		OR isnull(dw_detalle_salarios.GetItemNumber(i,'area')) &
+		OR isnull(dw_detalle_salarios.GetItemNumber(i,'cargo')) &
+		OR isnull(dw_detalle_salarios.GetItemNumber(i,'monto')) &
+		OR isnull(dw_detalle_salarios.GetItemDate(i,'fecha_inicio')) then
+			dw_detalle_salarios.DeleteRow(1)
+		end if
+	next
+	
     if dw_detalle_hijos.Update(true, false) = 1 then
         if dw_detalle_telefonos.Update(true, false) = 1 then
             if dw_detalle_emails.Update(true, false) = 1 then
-                commit using sqlca;
-                cb_cancelar.event clicked()
+					if dw_detalle_salarios.Update(true,false) = 1 then
+						commit using sqlca;
+						cb_cancelar.event clicked()
+					else
+						rollback using sqlca;
+               	MessageBox("Error!", "La aplicación ha encontrado un error en los salarios", stopsign!)
+					end if
             else
                 rollback using sqlca;
                 MessageBox("Error!", "La aplicación ha encontrado un error en los emails", stopsign!)
@@ -307,6 +337,12 @@ elseif CurrentFocus = 'telefonos' then
     if dw_detalle_telefonos.RowCount() = 0 then
         dw_detalle_telefonos.InsertRow(0)
     end if
+elseif CurrentFocus = 'salarios' then
+    dw_detalle_salarios.AcceptText()
+    dw_detalle_salarios.DeleteRow(dw_detalle_salarios.GetRow())
+    if dw_detalle_salarios.RowCount() = 0 then
+        dw_detalle_salarios.InsertRow(0)
+    end if
 end if
 end event
 
@@ -395,6 +431,7 @@ event clicked;dw_cabecera.Reset()
 dw_detalle_hijos.Reset()
 dw_detalle_emails.Reset()
 dw_detalle_telefonos.Reset()
+dw_detalle_salarios.Reset()
 dw_cabecera.InsertRow(0)
 dw_cabecera.SetFocus()
 end event
@@ -407,7 +444,6 @@ integer height = 3436
 integer taborder = 10
 string title = "none"
 string dataobject = "dw_abm_empleados_cabecera"
-boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
@@ -441,6 +477,13 @@ if this.GetColumn() = 1 then
 			MessageBox("Atencion","Se ha producido un error durante la lectura de los datos del detalle [durante la lectura de los telefonos]", StopSign!)
 		elseif lcant_filas = 0 then
 			MessageBox("Atencion","No hay datos para recuperar en el detalle de telefonos", Information!)
+		end if 
+		
+		lcant_filas = dw_detalle_salarios.retrieve(lvalor1)
+		if lcant_filas < 0 then
+			MessageBox("Atencion","Se ha producido un error durante la lectura de los datos del detalle [durante la lectura de los salarios]", StopSign!)
+		elseif lcant_filas = 0 then
+			MessageBox("Atencion","No hay datos para recuperar en el detalle de salarios", Information!)
 		end if 
 
 		commit using SQLCA;

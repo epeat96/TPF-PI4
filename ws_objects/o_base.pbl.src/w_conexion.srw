@@ -69,6 +69,11 @@ end on
 event open;title = "Nombre del programa: " + this.classname()
 end event
 
+event key;if key = keyenter! then
+	cb_aceptar.event clicked()
+end if
+end event
+
 type sle_clave from singlelineedit within w_conexion
 integer x = 1088
 integer y = 420
