@@ -60,8 +60,11 @@ type m_listados1 from menu within m_gestiondeempleados
 end type
 type m_empleadosporárea from menu within m_listados1
 end type
+type m_empleadosporevoluciónsalarial from menu within m_listados1
+end type
 type m_listados1 from menu within m_gestiondeempleados
 m_empleadosporárea m_empleadosporárea
+m_empleadosporevoluciónsalarial m_empleadosporevoluciónsalarial
 end type
 type m_gestiondeempleados from menu within m_principal
 m_cargadedatos1 m_cargadedatos1
@@ -701,6 +704,7 @@ end on
 
 type m_listados1 from menu within m_gestiondeempleados
 m_empleadosporárea m_empleadosporárea
+m_empleadosporevoluciónsalarial m_empleadosporevoluciónsalarial
 end type
 
 on m_listados1.create
@@ -722,12 +726,15 @@ this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
 this.m_empleadosporárea=create m_empleadosporárea
+this.m_empleadosporevoluciónsalarial=create m_empleadosporevoluciónsalarial
 this.Item[UpperBound(this.Item)+1]=this.m_empleadosporárea
+this.Item[UpperBound(this.Item)+1]=this.m_empleadosporevoluciónsalarial
 end on
 
 on m_listados1.destroy
 call super::destroy
 destroy(this.m_empleadosporárea)
+destroy(this.m_empleadosporevoluciónsalarial)
 end on
 
 type m_empleadosporárea from menu within m_listados1
@@ -757,6 +764,36 @@ this.bitmapgradient = true
 end on
 
 on m_empleadosporárea.destroy
+call super::destroy
+end on
+
+type m_empleadosporevoluciónsalarial from menu within m_listados1
+end type
+
+event clicked;open(w_rpt_empleado_evolucion_salarial)
+end event
+
+on m_empleadosporevoluciónsalarial.create
+call super::create
+this.text = "Empleados por Evolución Salarial"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_empleadosporevoluciónsalarial.destroy
 call super::destroy
 end on
 
