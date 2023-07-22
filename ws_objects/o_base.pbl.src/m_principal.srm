@@ -35,8 +35,6 @@ type m_cargadedatos1 from menu within m_gestiondeempleados
 end type
 type m_barrios from menu within m_cargadedatos1
 end type
-type m_cargo from menu within m_cargadedatos1
-end type
 type m_ciudades from menu within m_cargadedatos1
 end type
 type m_departamentos from menu within m_cargadedatos1
@@ -47,14 +45,16 @@ type m_profesiones from menu within m_cargadedatos1
 end type
 type m_paises from menu within m_cargadedatos1
 end type
+type m_tiposdedocumentos from menu within m_cargadedatos1
+end type
 type m_cargadedatos1 from menu within m_gestiondeempleados
 m_barrios m_barrios
-m_cargo m_cargo
 m_ciudades m_ciudades
 m_departamentos m_departamentos
 m_w_empleado m_w_empleado
 m_profesiones m_profesiones
 m_paises m_paises
+m_tiposdedocumentos m_tiposdedocumentos
 end type
 type m_listados1 from menu within m_gestiondeempleados
 end type
@@ -433,12 +433,12 @@ end on
 
 type m_cargadedatos1 from menu within m_gestiondeempleados
 m_barrios m_barrios
-m_cargo m_cargo
 m_ciudades m_ciudades
 m_departamentos m_departamentos
 m_w_empleado m_w_empleado
 m_profesiones m_profesiones
 m_paises m_paises
+m_tiposdedocumentos m_tiposdedocumentos
 end type
 
 on m_cargadedatos1.create
@@ -460,30 +460,30 @@ this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
 this.m_barrios=create m_barrios
-this.m_cargo=create m_cargo
 this.m_ciudades=create m_ciudades
 this.m_departamentos=create m_departamentos
 this.m_w_empleado=create m_w_empleado
 this.m_profesiones=create m_profesiones
 this.m_paises=create m_paises
+this.m_tiposdedocumentos=create m_tiposdedocumentos
 this.Item[UpperBound(this.Item)+1]=this.m_barrios
-this.Item[UpperBound(this.Item)+1]=this.m_cargo
 this.Item[UpperBound(this.Item)+1]=this.m_ciudades
 this.Item[UpperBound(this.Item)+1]=this.m_departamentos
 this.Item[UpperBound(this.Item)+1]=this.m_w_empleado
 this.Item[UpperBound(this.Item)+1]=this.m_profesiones
 this.Item[UpperBound(this.Item)+1]=this.m_paises
+this.Item[UpperBound(this.Item)+1]=this.m_tiposdedocumentos
 end on
 
 on m_cargadedatos1.destroy
 call super::destroy
 destroy(this.m_barrios)
-destroy(this.m_cargo)
 destroy(this.m_ciudades)
 destroy(this.m_departamentos)
 destroy(this.m_w_empleado)
 destroy(this.m_profesiones)
 destroy(this.m_paises)
+destroy(this.m_tiposdedocumentos)
 end on
 
 type m_barrios from menu within m_cargadedatos1
@@ -513,36 +513,6 @@ this.bitmapgradient = true
 end on
 
 on m_barrios.destroy
-call super::destroy
-end on
-
-type m_cargo from menu within m_cargadedatos1
-end type
-
-event clicked;open(w_abm_cargos)
-end event
-
-on m_cargo.create
-call super::create
-this.text = "Cargos"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_cargo.destroy
 call super::destroy
 end on
 
@@ -693,6 +663,36 @@ this.bitmapgradient = true
 end on
 
 on m_paises.destroy
+call super::destroy
+end on
+
+type m_tiposdedocumentos from menu within m_cargadedatos1
+end type
+
+event clicked;open(w_abm_tipos_documentos)
+end event
+
+on m_tiposdedocumentos.create
+call super::create
+this.text = "Tipos de Documentos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tiposdedocumentos.destroy
 call super::destroy
 end on
 
