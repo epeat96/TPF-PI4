@@ -6,19 +6,16 @@ type m_gestiondesalarios from menu within m_principal
 end type
 type m_cargadedatos from menu within m_gestiondesalarios
 end type
-type m_salario from menu within m_cargadedatos
-end type
-type m_liquidaciones from menu within m_cargadedatos
-end type
 type m_áreas from menu within m_cargadedatos
 end type
 type m_conceptos from menu within m_cargadedatos
 end type
+type m_liquidaciones from menu within m_cargadedatos
+end type
 type m_cargadedatos from menu within m_gestiondesalarios
-m_salario m_salario
-m_liquidaciones m_liquidaciones
 m_áreas m_áreas
 m_conceptos m_conceptos
+m_liquidaciones m_liquidaciones
 end type
 type m_listados from menu within m_gestiondesalarios
 end type
@@ -50,13 +47,22 @@ type m_gestiondedatosextra from menu within m_principal
 end type
 type p from menu within m_gestiondedatosextra
 end type
-type m_paises from menu within p
+type m_barrios from menu within p
 end type
 type m_ciudades from menu within p
 end type
+type m_cargo from menu within p
+end type
+type m_paises from menu within p
+end type
+type m_departamentos from menu within p
+end type
 type p from menu within m_gestiondedatosextra
-m_paises m_paises
+m_barrios m_barrios
 m_ciudades m_ciudades
+m_cargo m_cargo
+m_paises m_paises
+m_departamentos m_departamentos
 end type
 type m_gestiondedatosextra from menu within m_principal
 p p
@@ -155,10 +161,9 @@ destroy(this.m_listados)
 end on
 
 type m_cargadedatos from menu within m_gestiondesalarios
-m_salario m_salario
-m_liquidaciones m_liquidaciones
 m_áreas m_áreas
 m_conceptos m_conceptos
+m_liquidaciones m_liquidaciones
 end type
 
 on m_cargadedatos.create
@@ -179,79 +184,19 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
-this.m_salario=create m_salario
-this.m_liquidaciones=create m_liquidaciones
 this.m_áreas=create m_áreas
 this.m_conceptos=create m_conceptos
-this.Item[UpperBound(this.Item)+1]=this.m_salario
-this.Item[UpperBound(this.Item)+1]=this.m_liquidaciones
+this.m_liquidaciones=create m_liquidaciones
 this.Item[UpperBound(this.Item)+1]=this.m_áreas
 this.Item[UpperBound(this.Item)+1]=this.m_conceptos
+this.Item[UpperBound(this.Item)+1]=this.m_liquidaciones
 end on
 
 on m_cargadedatos.destroy
 call super::destroy
-destroy(this.m_salario)
-destroy(this.m_liquidaciones)
 destroy(this.m_áreas)
 destroy(this.m_conceptos)
-end on
-
-type m_salario from menu within m_cargadedatos
-end type
-
-on m_salario.create
-call super::create
-this.text = "Salario"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_salario.destroy
-call super::destroy
-end on
-
-type m_liquidaciones from menu within m_cargadedatos
-end type
-
-event clicked;open(w_amb_liquidaciones)
-end event
-
-on m_liquidaciones.create
-call super::create
-this.text = "Liquidaciones"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_liquidaciones.destroy
-call super::destroy
+destroy(this.m_liquidaciones)
 end on
 
 type m_áreas from menu within m_cargadedatos
@@ -311,6 +256,36 @@ this.bitmapgradient = true
 end on
 
 on m_conceptos.destroy
+call super::destroy
+end on
+
+type m_liquidaciones from menu within m_cargadedatos
+end type
+
+event clicked;open(w_abm_liquidaciones_cbdt)
+end event
+
+on m_liquidaciones.create
+call super::create
+this.text = "Liquidaciones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_liquidaciones.destroy
 call super::destroy
 end on
 
@@ -530,8 +505,11 @@ destroy(this.p)
 end on
 
 type p from menu within m_gestiondedatosextra
-m_paises m_paises
+m_barrios m_barrios
 m_ciudades m_ciudades
+m_cargo m_cargo
+m_paises m_paises
+m_departamentos m_departamentos
 end type
 
 on p.create
@@ -552,16 +530,115 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
-this.m_paises=create m_paises
+this.m_barrios=create m_barrios
 this.m_ciudades=create m_ciudades
-this.Item[UpperBound(this.Item)+1]=this.m_paises
+this.m_cargo=create m_cargo
+this.m_paises=create m_paises
+this.m_departamentos=create m_departamentos
+this.Item[UpperBound(this.Item)+1]=this.m_barrios
 this.Item[UpperBound(this.Item)+1]=this.m_ciudades
+this.Item[UpperBound(this.Item)+1]=this.m_cargo
+this.Item[UpperBound(this.Item)+1]=this.m_paises
+this.Item[UpperBound(this.Item)+1]=this.m_departamentos
 end on
 
 on p.destroy
 call super::destroy
-destroy(this.m_paises)
+destroy(this.m_barrios)
 destroy(this.m_ciudades)
+destroy(this.m_cargo)
+destroy(this.m_paises)
+destroy(this.m_departamentos)
+end on
+
+type m_barrios from menu within p
+end type
+
+event clicked;open(w_abm_barrios)
+end event
+
+on m_barrios.create
+call super::create
+this.text = "Barrios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_barrios.destroy
+call super::destroy
+end on
+
+type m_ciudades from menu within p
+end type
+
+event clicked;open(w_abm_ciudades)
+end event
+
+on m_ciudades.create
+call super::create
+this.text = "Ciudades"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ciudades.destroy
+call super::destroy
+end on
+
+type m_cargo from menu within p
+end type
+
+event clicked;open(w_abm_cargos)
+end event
+
+on m_cargo.create
+call super::create
+this.text = "Cargos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cargo.destroy
+call super::destroy
 end on
 
 type m_paises from menu within p
@@ -594,15 +671,12 @@ end on
 event clicked;open(w_abm_paises)
 end event
 
-type m_ciudades from menu within p
+type m_departamentos from menu within p
 end type
 
-event clicked;open(w_abm_ciudades)
-end event
-
-on m_ciudades.create
+on m_departamentos.create
 call super::create
-this.text = "Ciudades"
+this.text = "Departamentos"
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -620,9 +694,12 @@ this.toolbargradient = true
 this.bitmapgradient = true
 end on
 
-on m_ciudades.destroy
+on m_departamentos.destroy
 call super::destroy
 end on
+
+event clicked;open(w_abm_departamentos)
+end event
 
 type m_salir from menu within m_principal
 end type

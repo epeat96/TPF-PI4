@@ -2,6 +2,8 @@
 forward
 global type w_abm_empleados_cbdt from window
 end type
+type dw_1 from datawindow within w_abm_empleados_cbdt
+end type
 type cb_agregar from commandbutton within w_abm_empleados_cbdt
 end type
 type cb_grabar from commandbutton within w_abm_empleados_cbdt
@@ -28,7 +30,7 @@ end forward
 
 global type w_abm_empleados_cbdt from window
 integer width = 5408
-integer height = 2852
+integer height = 3800
 boolean titlebar = true
 string title = "Empleados"
 boolean controlmenu = true
@@ -41,6 +43,7 @@ windowstate windowstate = maximized!
 long backcolor = 67108864
 string icon = "AppIcon!"
 boolean center = true
+dw_1 dw_1
 cb_agregar cb_agregar
 cb_grabar cb_grabar
 cb_borrar cb_borrar
@@ -60,6 +63,7 @@ string CurrentFocus
 end variables
 
 on w_abm_empleados_cbdt.create
+this.dw_1=create dw_1
 this.cb_agregar=create cb_agregar
 this.cb_grabar=create cb_grabar
 this.cb_borrar=create cb_borrar
@@ -71,7 +75,8 @@ this.dw_detalle_hijos=create dw_detalle_hijos
 this.cb_cancelar=create cb_cancelar
 this.dw_cabecera=create dw_cabecera
 this.gb_1=create gb_1
-this.Control[]={this.cb_agregar,&
+this.Control[]={this.dw_1,&
+this.cb_agregar,&
 this.cb_grabar,&
 this.cb_borrar,&
 this.cb_salir,&
@@ -85,6 +90,7 @@ this.gb_1}
 end on
 
 on w_abm_empleados_cbdt.destroy
+destroy(this.dw_1)
 destroy(this.cb_agregar)
 destroy(this.cb_grabar)
 destroy(this.cb_borrar)
@@ -100,6 +106,17 @@ end on
 
 event open;cb_cancelar.event clicked()
 end event
+
+type dw_1 from datawindow within w_abm_empleados_cbdt
+integer x = 82
+integer y = 2716
+integer width = 2194
+integer height = 728
+integer taborder = 40
+string title = "none"
+boolean livescroll = true
+borderstyle borderstyle = stylelowered!
+end type
 
 type cb_agregar from commandbutton within w_abm_empleados_cbdt
 integer x = 4859
@@ -377,7 +394,7 @@ type dw_cabecera from datawindow within w_abm_empleados_cbdt
 integer x = 32
 integer y = 24
 integer width = 4763
-integer height = 2644
+integer height = 3436
 integer taborder = 10
 string title = "none"
 string dataobject = "dw_abm_empleados_cabecera"
