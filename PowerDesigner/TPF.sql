@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/21/2023 10:02:29 PM                        */
+/* Created on:     7/22/2023 7:00:39 PM                         */
 /*==============================================================*/
 
 
@@ -467,7 +467,7 @@ create table LIQUIDACIONES
 (
    LIQUIDACION          D_IDENTIFICADOR                not null,
    LEGAJO               varchar(100)                   not null,
-   MONTO_TOTAL          D_MONTO                        not null,
+   MONTO_TOTAL          D_MONTO                        null,
    FECHA_INICIAL        date                           not null,
    FECHA_FINAL          date                           not null,
    FECHA_PAGO           date                           not null,
@@ -475,6 +475,8 @@ create table LIQUIDACIONES
    MONTO_IPS_OBRERO     D_MONTO                        null,
    TOTAL_AGUINALDO      D_MONTO                        null,
    BONIFICACION_FAMILIAR D_MONTO                        null,
+   ACTIVO               character                      null default 'S'
+      constraint CKC_ACTIVO_LIQUIDAC check (ACTIVO is null or (ACTIVO in ('S','N'))),
    constraint PK_LIQUIDACIONES primary key clustered (LIQUIDACION)
 );
 
