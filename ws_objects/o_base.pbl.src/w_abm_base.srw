@@ -85,7 +85,7 @@ if dw_datos.getcolumn() = 1 then
 		
 		// hubo error
 		rollback using SQLCA;
-		messagebox("error","hubo un problema xddxdxd") 
+		messagebox("error","Hubo un error al guardar!") 
 		
 	elseif lfilas > 0 then
 		commit using sqlca;
@@ -157,7 +157,7 @@ string text = "Borrar"
 boolean flatstyle = true
 end type
 
-event clicked;if messagebox("atencion","esta seguro?",question!,okcancel!,2) = 1 then
+event clicked;if messagebox("Atencion","Esta seguro?",question!,okcancel!,2) = 1 then
 	
 	dw_datos.deleterow(0)
 	cb_grabar.event clicked()

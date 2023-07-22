@@ -32,3 +32,6 @@ end on
 event open;title = "Nombre del programa: " + this.classname()
 end event
 
+event close;DISCONNECT;
+end event
+

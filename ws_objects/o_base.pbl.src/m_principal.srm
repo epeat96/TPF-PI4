@@ -71,9 +71,12 @@ type m_gestiondedatosextra from menu within m_principal
 end type
 type p from menu within m_gestiondedatosextra
 end type
+type m_diasfestivos from menu within p
+end type
 type m_parametros from menu within p
 end type
 type p from menu within m_gestiondedatosextra
+m_diasfestivos m_diasfestivos
 m_parametros m_parametros
 end type
 type m_gestiondedatosextra from menu within m_principal
@@ -789,6 +792,7 @@ destroy(this.p)
 end on
 
 type p from menu within m_gestiondedatosextra
+m_diasfestivos m_diasfestivos
 m_parametros m_parametros
 end type
 
@@ -810,13 +814,46 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
+this.m_diasfestivos=create m_diasfestivos
 this.m_parametros=create m_parametros
+this.Item[UpperBound(this.Item)+1]=this.m_diasfestivos
 this.Item[UpperBound(this.Item)+1]=this.m_parametros
 end on
 
 on p.destroy
 call super::destroy
+destroy(this.m_diasfestivos)
 destroy(this.m_parametros)
+end on
+
+type m_diasfestivos from menu within p
+end type
+
+event clicked;open(w_abm_dias_festivos)
+end event
+
+on m_diasfestivos.create
+call super::create
+this.text = "Dias Festivos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_diasfestivos.destroy
+call super::destroy
 end on
 
 type m_parametros from menu within p
@@ -852,7 +889,8 @@ end on
 type m_salir from menu within m_principal
 end type
 
-event clicked;halt
+event clicked;DISCONNECT;
+halt
 end event
 
 on m_salir.create
