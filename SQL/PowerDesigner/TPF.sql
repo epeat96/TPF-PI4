@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/22/2023 8:19:02 PM                         */
+/* Created on:     7/23/2023 4:25:59 PM                         */
 /*==============================================================*/
 
 
@@ -532,6 +532,7 @@ create table PARAMETROS
    PARAMETRO            D_IDENTIFICADOR                not null,
    NOMBRE               D_NOMBRE                       null,
    VALOR                D_NOMBRE                       null,
+   COMENTARIO           varchar(255)                   null,
    constraint PK_PARAMETROS primary key clustered (PARAMETRO)
 );
 
