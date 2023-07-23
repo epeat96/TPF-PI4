@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/22/2023 7:00:39 PM                         */
+/* Created on:     7/22/2023 8:19:02 PM                         */
 /*==============================================================*/
 
 
@@ -468,9 +468,9 @@ create table LIQUIDACIONES
    LIQUIDACION          D_IDENTIFICADOR                not null,
    LEGAJO               varchar(100)                   not null,
    MONTO_TOTAL          D_MONTO                        null,
-   FECHA_INICIAL        date                           not null,
-   FECHA_FINAL          date                           not null,
-   FECHA_PAGO           date                           not null,
+   FECHA_INICIAL        date                           null,
+   FECHA_FINAL          date                           null,
+   FECHA_PAGO           date                           null,
    MONTO_IPS_PATRONAL   D_MONTO                        null,
    MONTO_IPS_OBRERO     D_MONTO                        null,
    TOTAL_AGUINALDO      D_MONTO                        null,
