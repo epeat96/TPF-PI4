@@ -1,6 +1,12 @@
 -- Limpiar la base de datos
 DELETE FROM paises;
 DELETE FROM tipos_documentos;
+DELETE FROM areas;
+DELETE FROM cargos;
+DELETE FROM profesiones;
+DELETE FROM conceptos;
+DELETE FROM motivos;
+DELETE FROM dias_festivos;
 -- Paises
 INSERT INTO paises (pais, nombre) VALUES (1, 'Paraguay');
 INSERT INTO paises (pais, nombre) VALUES (2, 'Argentina');
@@ -13,7 +19,7 @@ INSERT INTO departamentos (departamento, pais, nombre) VALUES (2, 1, 'San Pedro'
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (3, 1, 'Cordillera');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (4, 1, 'Guairá');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (5, 1, 'Caaguazú');
-INSERT INTO departamentos (departamento, pais, nombre) VALUES (6, 1, 'Caazapá');
+INSERT INTO departamentos (departamento, pais, nombre) VALUES (6, 1, 'CaazaGpá');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (7, 1, 'Itapúa');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (8, 1, 'Misiones');
 INSERT INTO departamentos (departamento, pais, nombre) VALUES (9, 1, 'Paraguarí');
@@ -153,3 +159,66 @@ INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (7, 'Certificado de
 INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (8, 'Tarjeta de Seguro Social');
 INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (9, 'Tarjeta de Trabajo');
 INSERT INTO tipos_documentos (tipo_documento, nombre) VALUES (10, 'Documento Nacional de Identidad');
+-- Areas
+INSERT INTO Areas (Area, Nombre) VALUES (1, 'Recursos Humanos');
+INSERT INTO Areas (Area, Nombre) VALUES (2, 'Contabilidad');
+INSERT INTO Areas (Area, Nombre) VALUES (3, 'Mercadeo');
+INSERT INTO Areas (Area, Nombre) VALUES (4, 'Producción');
+INSERT INTO Areas (Area, Nombre) VALUES (5, 'Logística');
+INSERT INTO Areas (Area, Nombre) VALUES (6, 'Ingeniería');
+INSERT INTO Areas (Area, Nombre) VALUES (7, 'Servicio al Cliente');
+INSERT INTO Areas (Area, Nombre) VALUES (8, 'Informática');
+INSERT INTO Areas (Area, Nombre) VALUES (9, 'Investigación y Desarrollo');
+INSERT INTO Areas (Area, Nombre) VALUES (10, 'Administración');
+-- Cargos
+INSERT INTO Cargos (Cargo, Nombre) VALUES (1, 'Analista');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (2, 'Asistente');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (3, 'Especialista');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (4, 'Gerente');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (5, 'Coordinador');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (6, 'Director');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (7, 'Vicepresidente');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (8, 'Presidente');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (9, 'Supervisor');
+INSERT INTO Cargos (Cargo, Nombre) VALUES (10, 'Técnico');
+-- Profesiones
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (1, 'Ingeniería Industrial');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (2, 'Ingeniería de Sistemas');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (3, 'Administración de Empresas');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (4, 'Contaduría');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (5, 'Marketing');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (6, 'Psicología Industrial');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (7, 'Ingeniería Mecánica');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (8, 'Ingeniería Electrónica');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (9, 'Derecho');
+INSERT INTO Profesiones (Profesion, Nombre) VALUES (10, 'Medicina');
+-- Conceptos
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (1, 'Salario', 'a', 's', 's');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (2, 'Bonificación Familiar', 'a', 's', 's');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (3, 'Bonificación por Antigüedad', 'm', 's', 's');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (4, 'Uniforme', 'm', 'n', 'n');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (5, 'Viáticos', 'm', 's', 's');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (6, 'Sanción', 'm', 's', 's');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (7, 'Horas Extras', 'm', 's', 's');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (8, 'Préstamo Personal', 'm', 'n', 'n');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (9, 'Seguro Médico', 'm', 'n', 'n');
+INSERT INTO Conceptos (Concepto, Nombre, Tipo, Aplica_ips, Aplica_aguinaldo) VALUES (10, 'Descuento por Tardanzas', 'm', 's', 's');
+-- Motivos
+INSERT INTO Motivos (Motivo, Nombre) VALUES (1, 'Aumento de Salario');
+INSERT INTO Motivos (Motivo, Nombre) VALUES (2, 'Promoción');
+INSERT INTO Motivos (Motivo, Nombre) VALUES (3, 'Desvinculación');
+INSERT INTO Motivos (Motivo, Nombre) VALUES (4, 'Reducción de Salario');
+INSERT INTO Motivos (Motivo, Nombre) VALUES (5, 'Cambio de área');
+INSERT INTO Motivos (Motivo, Nombre) VALUES (6, 'Cambio de Rol');
+INSERT INTO Motivos (Motivo, Nombre) VALUES (7, 'Cambio de jornada');
+-- Dias Festivos
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-01-01', 'Año Nuevo');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-03-01', 'Día de los Héroes');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-04-14', 'Viernes Santo');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-05-01', 'Día del Trabajador');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-05-14', 'Día de la Madre');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-06-12', 'Día de la Paz del Chaco');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-08-15', 'Día de la Independencia');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-09-29', 'Victoria de Boquerón');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-12-08', 'Día de la Virgen de Caacupé');
+INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-12-25', 'Navidad');
