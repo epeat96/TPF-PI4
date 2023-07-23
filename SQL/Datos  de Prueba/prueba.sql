@@ -7,6 +7,7 @@ DELETE FROM profesiones;
 DELETE FROM conceptos;
 DELETE FROM motivos;
 DELETE FROM dias_festivos;
+DELETE FROM parametros;
 -- Paises
 INSERT INTO paises (pais, nombre) VALUES (1, 'Paraguay');
 INSERT INTO paises (pais, nombre) VALUES (2, 'Argentina');
@@ -222,3 +223,6 @@ INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-08-15', 'Día de la Inde
 INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-09-29', 'Victoria de Boquerón');
 INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-12-08', 'Día de la Virgen de Caacupé');
 INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-12-25', 'Navidad');
+-- Parametros
+INSERT INTO parametros (parametro, nombre, valor, comentario) VALUES (1, 'salario_minimo', '2680373', 'Salario mínimo del Paraguay en guaraníes');
+INSERT INTO parametros (parametro, nombre, valor, comentario) VALUES (2, 'bonificacion_familiar', '0.05', 'Porcentaje de bonificación familiar');
