@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/23/2023 4:25:59 PM                         */
+/* Created on:     7/23/2023 5:31:47 PM                         */
 /*==============================================================*/
 
 
@@ -453,11 +453,11 @@ create table EMPLEADOS
 create table HIJOS 
 (
    HIJO                 D_IDENTIFICADOR                not null,
-   LEGAJO               varchar(100)                   null,
+   LEGAJO               varchar(100)                   not null,
    NOMBRE               D_NOMBRE                       null,
    APELLIDO             D_NOMBRE                       not null,
    FECHA_NACIMIENTO     date                           null,
-   constraint PK_HIJOS primary key clustered (HIJO)
+   constraint PK_HIJOS primary key clustered (HIJO, LEGAJO)
 );
 
 /*==============================================================*/
@@ -532,7 +532,6 @@ create table PARAMETROS
    PARAMETRO            D_IDENTIFICADOR                not null,
    NOMBRE               D_NOMBRE                       null,
    VALOR                D_NOMBRE                       null,
-   COMENTARIO           varchar(255)                   null,
    constraint PK_PARAMETROS primary key clustered (PARAMETRO)
 );
 
