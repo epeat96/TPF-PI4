@@ -85,7 +85,7 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
-string picturename = "C:\Users\Omar\Desktop\iconos para TP\candado2.png"
+string picturename = "C:\Users\Omar\Documents\GitHub\TPF-PI4\iconos\candado.png"
 alignment htextalign = left!
 end type
 
@@ -100,7 +100,7 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
-string picturename = "C:\Users\Omar\Desktop\iconos para TP\user.png"
+string picturename = "C:\Users\Omar\Documents\GitHub\TPF-PI4\iconos\user.png"
 alignment htextalign = left!
 end type
 
