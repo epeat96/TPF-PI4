@@ -1,14 +1,14 @@
 -- CalcularIPSPatronal
 BEGIN
-    IF EXISTS(SELECT 1 FROM SYS.SYSPROCEDURE WHERE PROC_NAME = 'CalcularIpsPatronal') THEN
-        EXECUTE IMMEDIATE 'DROP FUNCTION CalcularIpsPatronal';
+    IF EXISTS(SELECT 1 FROM SYS.SYSPROCEDURE WHERE PROC_NAME = 'CalcularIPSPatronal') THEN
+        EXECUTE IMMEDIATE 'DROP FUNCTION CalcularIPSPatronal';
     END IF;
 END;
 
-CREATE FUNCTION CalcularIpsPatronal(@Monto NUMERIC(12,2))
+CREATE FUNCTION CalcularIPSPatronal(@Monto NUMERIC(12,2))
 RETURNS NUMERIC(12,2)
 BEGIN
-    DECLARE @PorcentajeIpsPatronal NUMERIC(5,2);
-    SELECT valor INTO @PorcentajeIpsPatronal FROM parametros WHERE nombre = 'ips_patronal';
-    RETURN @Monto * @PorcentajeIpsPatronal;
+    DECLARE @PorcentajeIPSPatronal NUMERIC(5,2);
+    SELECT CAST(valor AS NUMERIC(5,2)) INTO @PorcentajeIPSPatronal FROM parametros WHERE nombre = 'ips_patronal';
+    RETURN @Monto * @PorcentajeIPSPatronal;
 END;
