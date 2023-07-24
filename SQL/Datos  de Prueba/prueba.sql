@@ -226,3 +226,5 @@ INSERT INTO dias_festivos (Fecha, Nombre) VALUES ('2023-12-25', 'Navidad');
 -- Parametros
 INSERT INTO parametros (parametro, nombre, valor, comentario) VALUES (1, 'salario_minimo', '2680373', 'Salario mínimo del Paraguay en guaraníes');
 INSERT INTO parametros (parametro, nombre, valor, comentario) VALUES (2, 'bonificacion_familiar', '0.05', 'Porcentaje de bonificación familiar');
+INSERT INTO parametros (parametro, nombre, valor, comentario) VALUES (3, 'ips_empleado', '0.09', 'Porcentaje de aporte de IPS del empleado');
+INSERT INTO parametros (parametro, nombre, valor, comentario) VALUES (4, 'ips_empleador', '0.165', 'Porcentaje de aporte de IPS del empleador');
