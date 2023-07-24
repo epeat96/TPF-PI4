@@ -9,6 +9,6 @@ CREATE FUNCTION CalcularBonificacionFamiliar(@Monto NUMERIC(12,2), @Legajo varch
 RETURNS NUMERIC(12,2)
 BEGIN
     DECLARE @PorcentajeBonificacionFamiliar NUMERIC(5,2);
-    SELECT CAST(valor AS NUMERIC(5,2)) INTO @PorcentajeBonificacionFamiliar FROM parametros WHERE nombre = 'ips_obrero';
+    SELECT CAST(valor AS NUMERIC(5,2)) INTO @PorcentajeBonificacionFamiliar FROM parametros WHERE nombre = 'bonificacion_familiar';
     RETURN @Monto * @PorcentajeBonificacionFamiliar * CantidadHijosMenores(@Legajo);
 END;
