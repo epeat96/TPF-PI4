@@ -25,29 +25,3 @@ BEGIN
     
     RETURN @ProximoDia;
 END;
--- CalcularIPSObrero
-IF EXISTS(SELECT 1 FROM sys.sysobjects WHERE name = 'CalcularIPSObrero' AND type = 'FN')
-BEGIN
-    DROP FUNCTION CalcularIPSObrero
-END
-
-CREATE FUNCTION CalcularIPSObrero(monto NUMERIC(12,2))
-RETURNS NUMERIC(12,2)
-BEGIN
-   DECLARE @ValorObrero NUMERIC(12,2);
-   SELECT valor INTO @ValorObrero FROM parametros WHERE nombre = 'ips_obrero';
-   RETURN monto * @ValorObrero;
-END
--- CalcularIPSPatronal
-IF EXISTS(SELECT 1 FROM sys.sysobjects WHERE name = 'CalcularIPSPatronal' AND type = 'FN')
-BEGIN
-    DROP FUNCTION CalcularIPSPatronal
-END
-
-CREATE FUNCTION CalcularIPSPatronal(monto NUMERIC(12,2))
-RETURNS NUMERIC(12,2)
-BEGIN
-   DECLARE @ValorPatronal NUMERIC(12,2);
-   SELECT valor INTO @ValorPatronal FROM parametros WHERE nombre = 'ips_patronal';
-   RETURN monto * @ValorPatronal;
-END
