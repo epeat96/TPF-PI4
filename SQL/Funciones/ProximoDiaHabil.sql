@@ -13,7 +13,7 @@ BEGIN
     SET @ProximaFechaEncontrada = 0;
     
     WHILE @ProximaFechaEncontrada = 0 LOOP
-        -- Si el día de la semana es sábado (6) o domingo (7), avanzamos al próximo día
+        -- Si el día de la semana es sábado (6), domingo (7) o existe esta fecha en la tabla de dias festivos, avanzamos al próximo día
         IF DAYNAME(@ProximoDia) IN ('Saturday', 'Sunday') OR EXISTS (SELECT 1 FROM dias_festivos WHERE fecha = @ProximoDia) THEN
             SET @ProximoDia = DATEADD(DAY, 1, @ProximoDia);
         ELSE
