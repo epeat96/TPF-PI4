@@ -13,10 +13,10 @@ BEGIN
 
     SELECT CAST(valor AS NUMERIC(12,2)) INTO @salario_minimo FROM parametros WHERE nombre = 'salario_minimo';
 
-    -- Si el salario nuevo es activo y es menor que el salario mínimo, lanzar un error
+    -- Si el salario nuevo es activo y es menor que el salario minimo, lanzar un error
     IF (nuevo_salario.fecha_fin IS NULL AND nuevo_salario.monto < @salario_minimo)
     THEN 
-        RAISERROR 20000 'El monto del salario activo no puede ser menor que el salario mínimo';
+        RAISERROR 20000 'El monto del salario activo no puede ser menor que el salario minimo';
     END IF;
 
     -- Si el salario nuevo es activo, finalizar los salarios activos anteriores del mismo empleado
