@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 11                       */
-/* Created on:     7/23/2023 5:38:17 PM                         */
+/* Created on:     7/23/2023 8:38:37 PM                         */
 /*==============================================================*/
 
 
@@ -465,7 +465,7 @@ create table HIJOS
 /*==============================================================*/
 create table LIQUIDACIONES 
 (
-   LIQUIDACION          D_IDENTIFICADOR                not null,
+   LIQUIDACION          D_IDENTIFICADOR                not null default autoincrement,
    LEGAJO               varchar(100)                   not null,
    MONTO_TOTAL          D_MONTO                        null,
    FECHA_INICIAL        date                           null,
