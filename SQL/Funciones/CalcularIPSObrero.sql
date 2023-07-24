@@ -1,27 +1,14 @@
--- ProximoDiaHabil
+-- CalcularIPSObrero
 BEGIN
-    IF EXISTS(SELECT 1 FROM SYS.SYSPROCEDURE WHERE PROC_NAME = 'ProximoDiaHabil') THEN
-        EXECUTE IMMEDIATE 'DROP FUNCTION ProximoDiaHabil';
+    IF EXISTS(SELECT 1 FROM SYS.SYSPROCEDURE WHERE PROC_NAME = 'CalcularIpsObrero') THEN
+        EXECUTE IMMEDIATE 'DROP FUNCTION CalcularIpsObrero';
     END IF;
 END;
 
-CREATE FUNCTION ProximoDiaHabil(@Fecha DATE)
-RETURNS DATE
+CREATE FUNCTION CalcularIpsObrero(@Monto NUMERIC(12,2))
+RETURNS NUMERIC(12,2)
 BEGIN
-    DECLARE @ProximoDia DATE;
-    DECLARE @ProximaFechaEncontrada BIT;
-
-    SET @ProximoDia = @Fecha;
-    SET @ProximaFechaEncontrada = 0;
-    
-    WHILE @ProximaFechaEncontrada = 0 LOOP
-        -- Si el día de la semana es sábado (6), domingo (7) o existe esta fecha en la tabla de dias festivos, avanzamos al próximo día
-        IF DAYNAME(@ProximoDia) IN ('Saturday', 'Sunday') OR EXISTS (SELECT 1 FROM dias_festivos WHERE fecha = @ProximoDia) THEN
-            SET @ProximoDia = DATEADD(DAY, 1, @ProximoDia);
-        ELSE
-            SET @ProximaFechaEncontrada = 1;
-        END IF;
-    END LOOP;
-    
-    RETURN @ProximoDia;
+    DECLARE @PorcentajeIpsObrero NUMERIC(5,2);
+    SELECT valor INTO @PorcentajeIpsObrero FROM parametros WHERE nombre = 'ips_obrero';
+    RETURN @Monto * @PorcentajeIpsObrero;
 END;
