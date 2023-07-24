@@ -8,10 +8,10 @@ END;
 CREATE FUNCTION CantidadHijosMenores(@Legajo varchar(150))
 RETURNS integer
 BEGIN
-    DECLARE @CantidadHijosMenores integer
+    DECLARE @CantidadHijosMenores integer;
     SELECT COUNT(1) INTO @CantidadHijosMenores
     FROM HIJOS
-    WHERE HIJOS.LEGAJO = @Legajo 
-    AND DATEDIFF(year, HIJOS.fecha_nacimiento, GETDATE()) < 18
+    WHERE HIJOS.LEGAJO = 1 
+    AND DATEDIFF(year, HIJOS.fecha_nacimiento, GETDATE()) < 18;
     RETURN @CantidadHijosMenores
 END;
