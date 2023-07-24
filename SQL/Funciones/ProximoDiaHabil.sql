@@ -3,31 +3,23 @@ BEGIN
     DROP FUNCTION ProximoDiaHabil
 END
 
-CREATE FUNCTION ProximoDiaHabil(@FechaInicio DATE)
+CREATE FUNCTION ProximoDiaHabil(@Fecha DATE)
 RETURNS DATE
 BEGIN
-    DECLARE @ProximoDia DATE
-    DECLARE @ProximaFechaEncontrada BIT
-    SET @ProximaFechaEncontrada = 0
-    SET @ProximoDia = @FechaInicio
+    DECLARE @ProximoDia DATE;
+    DECLARE @ProximaFechaEncontrada BIT;
 
-    WHILE @ProximaFechaEncontrada = 0
-    BEGIN
-        -- Verifica si el día es sábado (6) o domingo (7)
-        IF DATEPART(dw, @ProximoDia) IN (6, 7)
-        BEGIN
-            SET @ProximoDia = DATEADD(day, 1, @ProximoDia)
-        END
-        -- Verifica si el día es un día festivo
-        ELSE IF EXISTS (SELECT 1 FROM dias_festivos WHERE fecha = @ProximoDia)
-        BEGIN
-            SET @ProximoDia = DATEADD(day, 1, @ProximoDia)
-        END
+    SET @ProximoDia = @Fecha;
+    SET @ProximaFechaEncontrada = 0;
+    
+    WHILE @ProximaFechaEncontrada = 0 LOOP
+        -- Si el día de la semana es sábado (6) o domingo (7), avanzamos al próximo día
+        IF DAYNAME(@ProximoDia) IN ('Saturday', 'Sunday') OR EXISTS (SELECT 1 FROM dias_festivos WHERE fecha = @ProximoDia) THEN
+            SET @ProximoDia = DATEADD(DAY, 1, @ProximoDia);
         ELSE
-        BEGIN
-            SET @ProximaFechaEncontrada = 1
-        END
-    END
-
-    RETURN @ProximoDia
-END
+            SET @ProximaFechaEncontrada = 1;
+        END IF;
+    END LOOP;
+    
+    RETURN @ProximoDia;
+END;
