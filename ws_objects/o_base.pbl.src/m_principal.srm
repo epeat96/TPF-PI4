@@ -62,9 +62,12 @@ type m_empleadosporárea from menu within m_listados1
 end type
 type m_empleadosporevoluciónsalarial from menu within m_listados1
 end type
+type m_fichaempleadosliquidaciones from menu within m_listados1
+end type
 type m_listados1 from menu within m_gestiondeempleados
 m_empleadosporárea m_empleadosporárea
 m_empleadosporevoluciónsalarial m_empleadosporevoluciónsalarial
+m_fichaempleadosliquidaciones m_fichaempleadosliquidaciones
 end type
 type m_gestiondeempleados from menu within m_principal
 m_cargadedatos1 m_cargadedatos1
@@ -705,6 +708,7 @@ end on
 type m_listados1 from menu within m_gestiondeempleados
 m_empleadosporárea m_empleadosporárea
 m_empleadosporevoluciónsalarial m_empleadosporevoluciónsalarial
+m_fichaempleadosliquidaciones m_fichaempleadosliquidaciones
 end type
 
 on m_listados1.create
@@ -727,14 +731,17 @@ this.toolbargradient = true
 this.bitmapgradient = true
 this.m_empleadosporárea=create m_empleadosporárea
 this.m_empleadosporevoluciónsalarial=create m_empleadosporevoluciónsalarial
+this.m_fichaempleadosliquidaciones=create m_fichaempleadosliquidaciones
 this.Item[UpperBound(this.Item)+1]=this.m_empleadosporárea
 this.Item[UpperBound(this.Item)+1]=this.m_empleadosporevoluciónsalarial
+this.Item[UpperBound(this.Item)+1]=this.m_fichaempleadosliquidaciones
 end on
 
 on m_listados1.destroy
 call super::destroy
 destroy(this.m_empleadosporárea)
 destroy(this.m_empleadosporevoluciónsalarial)
+destroy(this.m_fichaempleadosliquidaciones)
 end on
 
 type m_empleadosporárea from menu within m_listados1
@@ -794,6 +801,36 @@ this.bitmapgradient = true
 end on
 
 on m_empleadosporevoluciónsalarial.destroy
+call super::destroy
+end on
+
+type m_fichaempleadosliquidaciones from menu within m_listados1
+end type
+
+event clicked;open(w_rpt_ficha_empleado_liquidaciones)
+end event
+
+on m_fichaempleadosliquidaciones.create
+call super::create
+this.text = "Ficha Empleados - Liquidaciones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fichaempleadosliquidaciones.destroy
 call super::destroy
 end on
 
