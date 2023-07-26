@@ -1,9 +1,8 @@
-IF EXISTS(SELECT 1 FROM SYS.SYSPROCEDURE WHERE proc_name = 'GenerarLiquidacionesEmpleadosNoLiquidadosEsteMes' AND creator = USER_ID('DBA'))
-BEGIN
-    DROP PROCEDURE "DBA"."GenerarLiquidacionesEmpleadosNoLiquidadosEsteMes";
-END;
+IF EXISTS(SELECT 1 FROM SYS.SYSPROCEDURE WHERE proc_name = 'GenerarCabecerasLiquidacionParaEmpleadosNoLiquidados')
+ THEN DROP PROCEDURE "DBA"."GenerarCabecerasLiquidacionParaEmpleadosNoLiquidados";
+END If;
 
-CREATE PROCEDURE "DBA"."GenerarLiquidacionesEmpleadosNoLiquidadosEsteMes"()
+CREATE PROCEDURE "DBA"."GenerarCabecerasLiquidacionParaEmpleadosNoLiquidados"()
 BEGIN
     DECLARE @PrimerDiaDelMes DATE;
     DECLARE @UltimoDiaDelMes DATE;
