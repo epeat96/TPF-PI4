@@ -22,11 +22,11 @@ BEGIN
     WHERE legajo = @legajo;
 
     UPDATE liquidaciones
-    SET monto_total = @salario_actual+DBA.CalcularBonificacionFamiliar(@salario_actual),
+    SET monto_total = @salario_actual+DBA.CalcularBonificacionFamiliar(@legajo),
         monto_ips_patronal = DBA.CalcularIPSPatronal(@salario_actual),
         monto_ips_obrero = DBA.CalcularIPSObrero(@salario_actual),
         bonificacion_familiar = DBA.CalcularBonificacionFamiliar(@legajo),
-        total_aguinaldo = (@salario_actual+DBA.CalcularBonificacionFamiliar(@salario_actual))/12  
+        total_aguinaldo = (@salario_actual+DBA.CalcularBonificacionFamiliar(@legajo))/12  
     WHERE liquidacion = nueva_liquidacion.liquidacion; 
 
 END;
