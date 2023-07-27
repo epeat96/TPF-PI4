@@ -9,18 +9,24 @@ REFERENCING NEW AS nueva_liquidacion
 FOR EACH ROW 
 BEGIN 
 
-    DECLARE @legajo VARCHAR(150)
-    DECLARE @liquidacion INTEGER 
-    DECLARE @salario_actual NUMERIC(12,2)
+    DECLARE @legajo VARCHAR(150);
+    DECLARE @liquidacion INTEGER ;
+    DECLARE @salario_actual NUMERIC(12,2);
 
-    SET @legajo = nueva_liquidacion.legajo
-    SET @liquidacion = nueva_liquidacion.liquidacion
+    SET @legajo = nueva_liquidacion.legajo;
+    SET @liquidacion = nueva_liquidacion.liquidacion;
 
-    SELECT e.salario_actual 
+    SELECT salario_actual 
     INTO @salario_actual
-    FROM EMPLEADOS e 
-    WHERE e.legajo = @legajo
+    FROM EMPLEADOS
+    WHERE legajo = @legajo;
 
-    nueva_liquidacion.monto_total = @salario_actual    
+    UPDATE liquidaciones
+    SET monto_total = @salario_actual+DBA.CalcularBonificacionFamiliar(@salario_actual),
+        monto_ips_patronal = DBA.CalcularIPSPatronal(@salario_actual),
+        monto_ips_obrero = DBA.CalcularIPSObrero(@salario_actual),
+        monto_ips_obrero = DBA.CalcularBonificacionFamiliar(@legajo),
+        total_aguinaldo = (@salario_actual+DBA.CalcularBonificacionFamiliar(@salario_actual))/12  
+    WHERE liquidacion = nueva_liquidacion.liquidacion 
 
 END;
