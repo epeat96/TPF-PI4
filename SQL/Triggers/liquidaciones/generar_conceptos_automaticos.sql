@@ -25,8 +25,8 @@ BEGIN
     SET monto_total = @salario_actual+DBA.CalcularBonificacionFamiliar(@salario_actual),
         monto_ips_patronal = DBA.CalcularIPSPatronal(@salario_actual),
         monto_ips_obrero = DBA.CalcularIPSObrero(@salario_actual),
-        monto_ips_obrero = DBA.CalcularBonificacionFamiliar(@legajo),
+        bonificacion_familiar = DBA.CalcularBonificacionFamiliar(@legajo),
         total_aguinaldo = (@salario_actual+DBA.CalcularBonificacionFamiliar(@salario_actual))/12  
-    WHERE liquidacion = nueva_liquidacion.liquidacion 
+    WHERE liquidacion = nueva_liquidacion.liquidacion; 
 
 END;
