@@ -16,5 +16,6 @@ BEGIN
         AND MONTH(l.fecha_inicial) = @MesActual
         AND YEAR(l.fecha_inicial) = @AñoActual
     WHERE l.legajo IS NULL
-    AND e.fecha_salida IS NULL;
+    AND e.fecha_salida IS NULL
+    AND e.salario_actual IS NOT NULL;
 END;
