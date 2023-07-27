@@ -11,6 +11,6 @@ BEGIN
     DECLARE @PorcentajeBonificacionFamiliar NUMERIC(5,2);
     DECLARE @Monto Numeric(12,2);
     SELECT CAST(valor AS NUMERIC(5,2)) INTO @PorcentajeBonificacionFamiliar FROM parametros WHERE nombre = 'bonificacion_familiar';
-    SELECT monto_actual INTO @Monto FROM empleados WHERE Legajo = @Legajo;
+    SELECT salario_actual INTO @Monto FROM empleados WHERE Legajo = @Legajo;
     RETURN @Monto * @PorcentajeBonificacionFamiliar * CantidadHijosMenores(@Legajo);
 END;
