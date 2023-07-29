@@ -1,13 +1,10 @@
-IF EXISTS (SELECT 1 FROM sys.sysprocedures WHERE name = 'ObtenerDatosDeConcepto')
-BEGIN
-    DROP PROCEDURE ObtenerDatosDeConcepto;
-END;
+IF EXISTS (SELECT 1 FROM sys.sysprocedure WHERE proc_name = 'ObtenerDatosDeConcepto')
+    THEN DROP PROCEDURE ObtenerDatosDeConcepto;
+END IF;
 
-CREATE PROCEDURE ObtenerDatosDeConcepto
-    @Concepto INT
-AS
+CREATE PROCEDURE ObtenerDatosDeConcepto(@Concepto INT)
 BEGIN
-    SELECT AplicaIps, AplicaAguinaldo
+    SELECT aplica_ips, aplica_aguinaldo
     FROM Conceptos
-    WHERE Id = @Concepto;
+    WHERE concepto = @Concepto;
 END;
