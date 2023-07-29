@@ -63,6 +63,33 @@ string dataobject = "dw_abm_liquidaciones_detalle_2"
 boolean vscrollbar = true
 end type
 
+event dw_detalles::retrieveend;call super::retrieveend;decimal ldc_monto_total
+decimal ldc_monto_ips_empleado
+decimal ldc_monto_ips_patronal
+decimal ldc_monto_bonificacion_familiar
+decimal ldc_monto_aguinaldo
+
+// Copiar datos ( de cabecera a detalle )
+// Copiar datos de monto_total
+ldc_monto_total = Dec(parent.dw_datos.GetItemNumber(1, "monto_total"))
+This.Object.c_monto_total.Expression = String(ldc_monto_total)
+// Copiar datos de bonificacion familiar
+ldc_monto_bonificacion_familiar = Dec(parent.dw_datos.GetItemNumber(1, "bonificacion_familiar"))
+This.Object.c_monto_bonificacion_familiar.Expression = String(ldc_monto_bonificacion_familiar)
+// Copiar datos de aguinaldo
+ldc_monto_aguinaldo = Dec(parent.dw_datos.GetItemNumber(1, "total_aguinaldo"))
+This.Object.c_monto_aguinaldo.Expression = String(ldc_monto_aguinaldo)
+// Copiar datos de ips patronal
+ldc_monto_ips_patronal = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_patronal"))
+This.Object.c_monto_ips_patronal.Expression = String(ldc_monto_ips_patronal)
+// Copiar datos de ips patronal
+ldc_monto_ips_patronal = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_patronal"))
+This.Object.c_monto_ips_patronal.Expression = String(ldc_monto_ips_patronal)
+// Copiar datos de ips empleado
+ldc_monto_ips_empleado = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_obrero"))
+This.Object.c_monto_ips_empleado.Expression = String(ldc_monto_ips_empleado)
+end event
+
 type dw_datos from w_abm_cabecera_base`dw_datos within w_abm_liquidaciones_cbdt
 integer x = 69
 integer y = 148
