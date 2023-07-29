@@ -31,21 +31,21 @@ BEGIN
 
     SELECT aplica_ips,aplica_aguinaldo INTO @salario_aplica_ips,@salario_aplica_aguinaldo
     FROM CONCEPTOS
-    WHERE concepto = 1
+    WHERE concepto = 1;
 
     SELECT aplica_ips,aplica_aguinaldo INTO @bonificacion_familiar_aplica_ips,@bonificacion_familiar_aplica_aguinaldo
     FROM CONCEPTOS
-    WHERE concepto = 2
+    WHERE concepto = 2;
 
-    @monto_para_ips = 0
+    @monto_para_ips = 0;
     
     IF @salario_aplica_ips = 's' THEN
-        @monto_para_ips = @monto_para_ips + @salario_actual
-    END IF
+        @monto_para_ips = @monto_para_ips + @salario_actual;
+    END IF;
 
     IF @bonificacion_familiar_aplica_ips = 's' THEN
-        @monto_para_ips = @monto_para_ips + DB.CalcularBonificacionFamiliar(@legajo)
-    END IF
+        @monto_para_ips = @monto_para_ips + DB.CalcularBonificacionFamiliar(@legajo);
+    END IF;
 
     SET @monto_total = (@salario_actual + DBA.CalcularBonificacionFamiliar(@legajo));
 
