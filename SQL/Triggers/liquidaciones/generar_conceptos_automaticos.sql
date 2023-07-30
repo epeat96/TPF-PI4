@@ -16,9 +16,9 @@ BEGIN
     DECLARE @monto_para_ips NUMERIC(12,2);
     DECLARE @monto_para_aguinaldo NUMERIC(12,2);
     DECLARE @salario_aplica_ips CHARACTER;
-    DECLARE @salario_aplica_aguinaldo CHARACTER
+    DECLARE @salario_aplica_aguinaldo CHARACTER;
     DECLARE @bonificacion_familiar_aplica_ips CHARACTER;
-    DECLARE @bonificacion_familiar_aplica_aguinaldo CHARACTER
+    DECLARE @bonificacion_familiar_aplica_aguinaldo CHARACTER;
 
     SET @legajo = nueva_liquidacion.legajo;
     SET @liquidacion = nueva_liquidacion.liquidacion;
@@ -37,14 +37,27 @@ BEGIN
     FROM CONCEPTOS
     WHERE concepto = 2;
 
-    @monto_para_ips = 0;
+    SET @monto_para_ips = 0;
+    SET @monto_para_aguinaldo = 0;
     
-    IF @salario_aplica_ips = 's' THEN
-        @monto_para_ips = @monto_para_ips + @salario_actual;
+    IF @salario_aplica_ips = 's' 
+    THEN
+        SET @monto_para_ips = @monto_para_ips + @salario_actual;
     END IF;
 
-    IF @bonificacion_familiar_aplica_ips = 's' THEN
-        @monto_para_ips = @monto_para_ips + DB.CalcularBonificacionFamiliar(@legajo);
+    IF @bonificacion_familiar_aplica_ips = 's' 
+    THEN
+        SET @monto_para_ips = @monto_para_ips + DBA.CalcularBonificacionFamiliar(@legajo);
+    END IF;
+    // Calculos de aguinaldo
+        IF @salario_aplica_aguinaldo = 's' 
+    THEN
+        SET @monto_para_aguinaldo = @monto_para_aguinaldo + @salario_actual;
+    END IF;
+
+    IF @bonificacion_familiar_aplica_aguinaldo = 's' 
+    THEN
+        SET @monto_para_aguinaldo = @monto_para_aguinaldo + DBA.CalcularBonificacionFamiliar(@legajo);
     END IF;
 
     SET @monto_total = (@salario_actual + DBA.CalcularBonificacionFamiliar(@legajo));
@@ -54,7 +67,7 @@ BEGIN
         monto_ips_patronal = DBA.CalcularIPSPatronal(@monto_para_ips),
         monto_ips_obrero = DBA.CalcularIPSObrero(@monto_para_ips),
         bonificacion_familiar = DBA.CalcularBonificacionFamiliar(@legajo),
-        total_aguinaldo = @monto_total/12  
+        total_aguinaldo = @monto_para_aguinaldo/12  
     WHERE liquidacion = nueva_liquidacion.liquidacion;
 
     -- Insertar la liquidacion automatica del Salario 

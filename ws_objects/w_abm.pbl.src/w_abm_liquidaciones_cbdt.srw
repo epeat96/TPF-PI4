@@ -29,6 +29,25 @@ call super::destroy
 destroy(this.st_1)
 end on
 
+event asigna_clave;call super::asigna_clave;
+dw_detalles.accepttext()
+dw_datos.accepttext()
+
+int i
+
+for i = dw_detalles.RowCount() to 1 step -1
+	
+	if isnull (dw_detalles.GetItemNumber(i,'concepto')) then
+		dw_detalles.DeleteRow(i)
+	end if
+next
+
+dw_datos.setitem(1,'monto_ips_patronal', dw_detalles.getitemnumber(1,'c_monto_ips_patronal'))
+dw_datos.setitem(1,'monto_ips_obrero', dw_detalles.getitemnumber(1,'c_monto_ips_empleado'))
+dw_datos.setitem(1,'total_aguinaldo', dw_detalles.getitemnumber(1,'c_monto_aguinaldo'))
+dw_datos.setitem(1,'bonificacion_familiar', dw_detalles.getitemnumber(1,'c_monto_bonificacion_familiar'))
+end event
+
 type cb_salir from w_abm_cabecera_base`cb_salir within w_abm_liquidaciones_cbdt
 integer x = 2633
 integer y = 1752
@@ -39,10 +58,99 @@ integer x = 1481
 integer y = 1752
 end type
 
+event cb_cancelar::clicked;call super::clicked;dw_detalles.Object.c_monto_total.Expression = "0"
+dw_detalles.Object.c_monto_ips_patronal.Expression = "0"
+dw_detalles.Object.c_monto_ips_empleado.Expression = "0"
+dw_detalles.Object.c_monto_aguinaldo.Expression = "0"
+dw_detalles.Object.c_monto_bonificacion_familiar.Expression = "0"
+end event
+
 type cb_borrar_item from w_abm_cabecera_base`cb_borrar_item within w_abm_liquidaciones_cbdt
 integer x = 1001
 integer y = 1752
 end type
+
+event cb_borrar_item::clicked;long i
+dw_detalles.AcceptText()
+
+for i = dw_detalles.RowCount() to 1 step -1	
+	if isnull (dw_detalles.GetItemNumber(i,'concepto')) then
+		dw_detalles.DeleteRow(i)
+	end if
+next
+
+dw_detalles.DeleteRow(dw_detalles.GetRow())
+if dw_detalles.RowCount() = 0 then
+	dw_detalles.InsertRow(0)
+end if
+
+// Volver a calcular los campos calculados
+long ll_Fila
+long ll_Concepto 
+decimal ld_Monto
+decimal ld_SumTotal,ld_SumIPS,ld_SumAguinaldo, ld_SumBonificacionFamiliar
+long ll_max
+string ls_Operacion
+character lc_aplica_ips, lc_aplica_aguinaldo
+decimal ld_PorcentajeObrero, ld_PorcentajePatronal
+
+// Inicializar variables de suma
+ld_SumTotal = 0
+ld_SumIPS = 0
+ld_SumAguinaldo = 0
+// Obtener el número total de filas
+ll_Max = dw_detalles.RowCount()
+// Recorrer todas las filas
+FOR ll_Fila = 1 TO ll_Max
+	ll_Concepto = dw_detalles.GetItemNumber(ll_Fila, "concepto")
+	ls_Operacion = dw_detalles.GetItemString(ll_Fila, "signo")
+	ld_Monto = dw_detalles.GetItemDecimal(ll_Fila, "monto")
+			
+	SELECT * INTO :lc_aplica_ips,:lc_aplica_aguinaldo
+	FROM DBA.ObtenerDatosDeConcepto(:ll_Concepto);
+			
+	IF ls_Operacion = 'S' THEN
+				
+		IF lc_aplica_ips = 's' THEN
+			ld_SumIPS += ld_Monto
+		END IF
+		IF lc_aplica_aguinaldo = 's' THEN
+			ld_SumAguinaldo += ld_Monto
+		END IF
+				
+		ld_SumTotal += ld_Monto
+	ELSEIF ls_Operacion = 'R' THEN
+		IF lc_aplica_ips = 's' THEN
+			ld_SumIPS -= ld_Monto
+		END IF
+		IF lc_aplica_aguinaldo = 's' THEN
+			ld_SumAguinaldo -= ld_Monto
+		END IF
+		ld_SumTotal -= ld_Monto
+	END IF
+			
+	IF ll_Concepto = 2 THEN
+		ld_SumBonificacionFamiliar = ld_Monto
+	END IF
+NEXT
+		
+SELECT valor INTO :ld_PorcentajeObrero
+FROM PARAMETROS
+WHERE nombre = 'ips_obrero';
+SELECT valor INTO :ld_PorcentajePatronal
+FROM PARAMETROS
+WHERE nombre = 'ips_patronal';
+		
+dw_detalles.Object.c_monto_total.Expression = String(ld_SumTotal)
+dw_detalles.Object.c_monto_ips_patronal.Expression = String(ld_SumIPS*ld_PorcentajePatronal)
+dw_detalles.Object.c_monto_ips_empleado.Expression = String(ld_SumIPS*ld_PorcentajeObrero)
+dw_detalles.Object.c_monto_aguinaldo.Expression = String(ld_SumAguinaldo/12)
+dw_detalles.Object.c_monto_bonificacion_familiar.Expression = String(ld_SumBonificacionFamiliar)
+
+
+
+
+end event
 
 type cb_borrar from w_abm_cabecera_base`cb_borrar within w_abm_liquidaciones_cbdt
 integer x = 530
@@ -88,6 +196,89 @@ This.Object.c_monto_ips_patronal.Expression = String(ldc_monto_ips_patronal)
 // Copiar datos de ips empleado
 ldc_monto_ips_empleado = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_obrero"))
 This.Object.c_monto_ips_empleado.Expression = String(ldc_monto_ips_empleado)
+end event
+
+event dw_detalles::itemchanged;call super::itemchanged;long ll_Fila
+long ll_Concepto 
+decimal ld_Monto
+decimal ld_SumTotal,ld_SumIPS,ld_SumAguinaldo, ld_SumBonificacionFamiliar
+long ll_max
+string ls_Columna,ls_Operacion,ls_SQL
+character lc_aplica_ips, lc_aplica_aguinaldo
+decimal ld_PorcentajeObrero, ld_PorcentajePatronal
+
+this.AcceptText()
+
+ls_columna = this.GetColumnName()
+
+CHOOSE CASE ls_columna
+    CASE "concepto"
+		this.Modify("monto.Protect=0")
+		return
+    CASE "fecha"
+		return
+    CASE ELSE
+		// Inicializar variables de suma
+		ld_SumTotal = 0
+		ld_SumIPS = 0
+		ld_SumAguinaldo = 0
+		// Obtener el número total de filas
+		ll_Max = this.RowCount()
+		// Recorrer todas las filas
+		FOR ll_Fila = 1 TO ll_Max
+			ll_Concepto = this.GetItemNumber(ll_Fila, "concepto")
+			ls_Operacion = this.GetItemString(ll_Fila, "signo")
+			ld_Monto = this.GetItemDecimal(ll_Fila, "monto")
+			
+			SELECT * INTO :lc_aplica_ips,:lc_aplica_aguinaldo
+			FROM DBA.ObtenerDatosDeConcepto(:ll_Concepto);
+			
+			IF ls_Operacion = 'S' THEN
+				
+				IF lc_aplica_ips = 's' THEN
+					ld_SumIPS += ld_Monto
+				END IF
+				IF lc_aplica_aguinaldo = 's' THEN
+					ld_SumAguinaldo += ld_Monto
+				END IF
+				
+				ld_SumTotal += ld_Monto
+			ELSEIF ls_Operacion = 'R' THEN
+				IF lc_aplica_ips = 's' THEN
+					ld_SumIPS -= ld_Monto
+				END IF
+				IF lc_aplica_aguinaldo = 's' THEN
+					ld_SumAguinaldo -= ld_Monto
+				END IF
+				ld_SumTotal -= ld_Monto
+			END IF
+			
+			IF ll_Concepto = 2 THEN
+				ld_SumBonificacionFamiliar = ld_Monto
+			END IF
+			
+		NEXT
+		
+		SELECT valor INTO :ld_PorcentajeObrero
+		FROM PARAMETROS
+		WHERE nombre = 'ips_obrero';
+		SELECT valor INTO :ld_PorcentajePatronal
+		FROM PARAMETROS
+		WHERE nombre = 'ips_patronal';
+		
+		this.Object.c_monto_total.Expression = String(ld_SumTotal)
+		this.Object.c_monto_ips_patronal.Expression = String(ld_SumIPS*ld_PorcentajePatronal)
+		this.Object.c_monto_ips_empleado.Expression = String(ld_SumIPS*ld_PorcentajeObrero)
+		this.Object.c_monto_aguinaldo.Expression = String(ld_SumAguinaldo/12)
+		this.Object.c_monto_bonificacion_familiar.Expression = String(ld_SumBonificacionFamiliar)
+      return
+END CHOOSE
+end event
+
+event dw_detalles::nuevo_item;if key = keyenter! then
+	this.insertRow(0)
+	this.Modify("monto.Protect=1")
+end if
 end event
 
 type dw_datos from w_abm_cabecera_base`dw_datos within w_abm_liquidaciones_cbdt
