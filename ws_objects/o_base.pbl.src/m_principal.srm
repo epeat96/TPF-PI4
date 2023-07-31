@@ -16,12 +16,15 @@ type m_liquidaciones from menu within m_cargadedatos
 end type
 type m_motivos from menu within m_cargadedatos
 end type
+type m_salarios from menu within m_cargadedatos
+end type
 type m_cargadedatos from menu within m_gestiondesalarios
 m_áreas m_áreas
 m_cargos m_cargos
 m_conceptos m_conceptos
 m_liquidaciones m_liquidaciones
 m_motivos m_motivos
+m_salarios m_salarios
 end type
 type m_listados from menu within m_gestiondesalarios
 end type
@@ -190,6 +193,7 @@ m_cargos m_cargos
 m_conceptos m_conceptos
 m_liquidaciones m_liquidaciones
 m_motivos m_motivos
+m_salarios m_salarios
 end type
 
 on m_cargadedatos.create
@@ -215,11 +219,13 @@ this.m_cargos=create m_cargos
 this.m_conceptos=create m_conceptos
 this.m_liquidaciones=create m_liquidaciones
 this.m_motivos=create m_motivos
+this.m_salarios=create m_salarios
 this.Item[UpperBound(this.Item)+1]=this.m_áreas
 this.Item[UpperBound(this.Item)+1]=this.m_cargos
 this.Item[UpperBound(this.Item)+1]=this.m_conceptos
 this.Item[UpperBound(this.Item)+1]=this.m_liquidaciones
 this.Item[UpperBound(this.Item)+1]=this.m_motivos
+this.Item[UpperBound(this.Item)+1]=this.m_salarios
 end on
 
 on m_cargadedatos.destroy
@@ -229,6 +235,7 @@ destroy(this.m_cargos)
 destroy(this.m_conceptos)
 destroy(this.m_liquidaciones)
 destroy(this.m_motivos)
+destroy(this.m_salarios)
 end on
 
 type m_áreas from menu within m_cargadedatos
@@ -378,6 +385,36 @@ this.bitmapgradient = true
 end on
 
 on m_motivos.destroy
+call super::destroy
+end on
+
+type m_salarios from menu within m_cargadedatos
+end type
+
+event clicked;open(w_abm_salarios_empleados)
+end event
+
+on m_salarios.create
+call super::create
+this.text = "Salarios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_salarios.destroy
 call super::destroy
 end on
 
