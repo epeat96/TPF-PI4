@@ -11,7 +11,7 @@ BEGIN
     DECLARE @CantidadHijosMenores integer;
     SELECT COUNT(1) INTO @CantidadHijosMenores
     FROM HIJOS
-    WHERE HIJOS.LEGAJO = 1 
+    WHERE HIJOS.LEGAJO = @Legajo 
     AND DATEDIFF(year, HIJOS.fecha_nacimiento, GETDATE()) < 18;
     RETURN @CantidadHijosMenores
 END;
