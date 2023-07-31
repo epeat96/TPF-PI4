@@ -190,9 +190,6 @@ This.Object.c_monto_aguinaldo.Expression = String(ldc_monto_aguinaldo)
 // Copiar datos de ips patronal
 ldc_monto_ips_patronal = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_patronal"))
 This.Object.c_monto_ips_patronal.Expression = String(ldc_monto_ips_patronal)
-// Copiar datos de ips patronal
-ldc_monto_ips_patronal = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_patronal"))
-This.Object.c_monto_ips_patronal.Expression = String(ldc_monto_ips_patronal)
 // Copiar datos de ips empleado
 ldc_monto_ips_empleado = Dec(parent.dw_datos.GetItemNumber(1, "monto_ips_obrero"))
 This.Object.c_monto_ips_empleado.Expression = String(ldc_monto_ips_empleado)
