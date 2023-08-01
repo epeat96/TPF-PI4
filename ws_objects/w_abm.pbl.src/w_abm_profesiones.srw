@@ -7,8 +7,8 @@ end type
 end forward
 
 global type w_abm_profesiones from w_abm_base
-integer width = 2725
-integer height = 1244
+integer width = 2720
+integer height = 888
 boolean minbox = false
 boolean maxbox = false
 boolean resizable = false
@@ -30,35 +30,35 @@ destroy(this.st_1)
 end on
 
 type dw_datos from w_abm_base`dw_datos within w_abm_profesiones
-integer width = 2514
-integer height = 680
+integer width = 2487
+integer height = 356
 string dataobject = "dw_abm_profesiones"
 end type
 
 type cb_salir from w_abm_base`cb_salir within w_abm_profesiones
-integer x = 2043
-integer y = 912
+integer x = 2034
+integer y = 576
 end type
 
 type cb_cancelar from w_abm_base`cb_cancelar within w_abm_profesiones
-integer x = 1207
-integer y = 912
+integer x = 1198
+integer y = 576
 end type
 
 type cb_borrar from w_abm_base`cb_borrar within w_abm_profesiones
-integer x = 626
-integer y = 912
+integer x = 617
+integer y = 576
 end type
 
 type cb_grabar from w_abm_base`cb_grabar within w_abm_profesiones
-integer x = 87
-integer y = 912
+integer x = 78
+integer y = 576
 end type
 
 type st_1 from statictext within w_abm_profesiones
 integer x = 69
-integer y = 32
-integer width = 562
+integer y = 24
+integer width = 754
 integer height = 64
 boolean bringtotop = true
 integer textsize = -10
