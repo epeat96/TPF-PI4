@@ -473,7 +473,7 @@ end event
 
 on m_liquidacionesmensuales.create
 call super::create
-this.text = "Listado Ficha de Empleado"
+this.text = "Listado De Liquidación Mensual"
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
