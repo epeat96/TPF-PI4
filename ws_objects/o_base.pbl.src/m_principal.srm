@@ -457,7 +457,7 @@ end on
 type m_liquidacionesmensuales from menu within m_listados
 end type
 
-event clicked;open(w_rpt_liquidaciones_mensuales_4arg)
+event clicked;open(w_rpt_base_4)
 end event
 
 on m_liquidacionesmensuales.create
