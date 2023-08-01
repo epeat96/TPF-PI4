@@ -7,8 +7,11 @@ end type
 end forward
 
 global type w_abm_ciudades from w_abm_base
-integer width = 2843
-integer height = 1068
+integer width = 2816
+integer height = 1044
+boolean minbox = false
+boolean maxbox = false
+boolean resizable = false
 st_1 st_1
 end type
 global w_abm_ciudades w_abm_ciudades
